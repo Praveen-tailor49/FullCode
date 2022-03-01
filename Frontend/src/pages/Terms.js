@@ -4,19 +4,19 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import {Link} from 'react-router-dom'
 import Footer from '../components/Footer';
 
-const RiskDisclosure = () => {
-    const [RoleRisk, setRole] = useState([])
+const Terms = () => {
+    const [TermsCondition, setTerms] = useState([])
 
 
     useEffect(() => {
-        showRole();
+        showTerms();
     
       },[])
     
-      const showRole = async () => {
-        const ress = await fetch('http://localhost:5000/show/role')
-        const role = await ress.json();
-        setRole(role)
+      const showTerms = async () => {
+        const ress = await fetch('http://localhost:5000/show/terms')
+        const terms = await ress.json();
+        setTerms(terms)
       }
 
     return (
@@ -24,14 +24,14 @@ const RiskDisclosure = () => {
             <div>
                 <Navbar bg="primary" variant="dark">
                     <Navbar.Brand ><Link to='/mine' style={{marginLeft:'42px', color:'white'}}><IoMdArrowRoundBack/></Link></Navbar.Brand>
-                    <Navbar.Brand >Risk Disclosure</Navbar.Brand>
+                    <Navbar.Brand >Terms & Condition</Navbar.Brand>
                 </Navbar>
             </div>
                 <div style={{ padding: '30px' }}>
                     {
-                        RoleRisk.map(RoleRisk=>(
+                        TermsCondition.map(TermsCondition=>(
                             <p style={{ textAlign: 'justify' }}>
-                           {RoleRisk.roleContent}
+                           {TermsCondition.termsContent}
                         </p>
                         ))
                     }
@@ -43,4 +43,4 @@ const RiskDisclosure = () => {
     )
 }
 
-export default RiskDisclosure
+export default Terms
