@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { Navbar, Form, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react'
+import { Navbar } from 'react-bootstrap';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer';
@@ -7,43 +7,40 @@ import Footer from '../components/Footer';
 
 const Payment = ({ baseUrl }) => {
 
-    const [userPaymentInfo, setUserPaymentInfo] = useState({
-        userId: localStorage.getItem('token'), paymentHeading: '', paymentContent: '', paymentImage: '', status: '1', dateTime: new Date()
-    })
+    // const [userPaymentInfo, setUserPaymentInfo] = useState({
+    //     userId: localStorage.getItem('token'), paymentHeading: '', paymentContent: '', paymentImage: '', status: '1', dateTime: new Date()
+    // })
+    const [userPaymentInfo, setUserPaymentInfo] = useState([])
 
-    const HandlShow = (e) => {
-        const { name, value } = e.target
+    // const HandlShow = (e) => {
+    //     const { name, value } = e.target
 
-        setUserPaymentInfo((prastate) => ({
-            ...prastate,
-            [name]: value,
-        }))
-    }
+    //     setUserPaymentInfo((prastate) => ({
+    //         ...prastate,
+    //         [name]: value,
+    //     }))
+    // }
 
-    const paymentReq = (e) => {
-        e.preventDefault()
-        const { userId, paymentHeading, paymentContent, paymentImage, status, dateTime } = userPaymentInfo
+    useEffect(() => {
+        paymentShow()
+    }, [])
+
+    const paymentShow = () => {
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
-            userId, paymentHeading, paymentContent, paymentImage, status, dateTime
-        });
-
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
-            body: raw,
             redirect: 'follow'
         };
 
-        fetch(baseUrl + "paymentReq", requestOptions)
+        fetch(baseUrl + "show/admin/Payment", requestOptions)
             .then(response => response.json())
             .then(result => {
-                if (result.mess === 'Successfully') {
-                    alert('Successfully')
-                }
+                console.log(result);
+                setUserPaymentInfo(result)
             })
             .catch(error => console.log('error', error));
     }
@@ -57,16 +54,40 @@ const Payment = ({ baseUrl }) => {
             </div>
 
             <div style={{ marginBottom: '7rem' }}>
-                <div style={{ margin: '25px', boxShadow: '1px 1px 30px 1px gray', borderRadius: '10px' }}>
-                    <div style={{ padding: '15px' }}>
-                        <div style={{ padding: '5px' }}>
-                            <p>My Promotion Code</p>
 
-                            <hr />
+                {
+                    userPaymentInfo.map((val, index) => (
+                        <div style={{ margin: '25px', boxShadow: '1px 1px 30px 1px gray', borderRadius: '10px', textAlign:'center' }}>
+                            <div style={{ padding: '15px' }}>
+                                <div style={{ padding: '5px' }}>
+                                    <p>{val.paymentContent}</p>
+
+                                    <hr />
+                                </div>
+                                {
+                                    val.showImga === 'Disable' ? <p></p>
+
+                                        :
+                                        <div style={{ padding: '5px' }}>
+
+                                            <p>{val.paymentImage === '' ? <img src='https://via.placeholder.com/300' /> : <p>{val.paymentImage}</p>}</p>
+                                            <hr />
+                                        </div>
+
+                                }
+
+                                <div style={{ padding: '5px' }}>
+                                    <p>{val.paymentHeading}</p>
+
+                                    <hr />
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    ))
+                }
 
-                </div>
+
+
             </div>
 
             <Footer />

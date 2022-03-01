@@ -526,11 +526,11 @@ app.post('/takec', (req, res) => {
     )
 }) 
 
-app.post('/payment', (req, res) => {
+app.post('/add/adminPayment', (req, res) => {
 
-    const { userId, paymentHeading, paymentContent, paymentImage, status, dateTime } = req.body;
-    db.query(`INSERT INTO payment (userId, paymentHeading, paymentContent, paymentImage, status, dateTime) VALUES (?,?,?,?,?,?)`,
-        [userId, paymentHeading, paymentContent, paymentImage, status, dateTime],
+    const {  paymentHeading, paymentContent, paymentImage, status, dateTime,showImga } = req.body;
+    db.query(`INSERT INTO payment (paymentHeading, paymentContent, paymentImage, status, dateTime,showImga) VALUES (?,?,?,?,?,?)`,
+        [paymentHeading, paymentContent, paymentImage, status, dateTime,showImga],
         (err, result) => {
             if (err) {
                 res.status(400).json(err);
@@ -542,7 +542,7 @@ app.post('/payment', (req, res) => {
     )
 })
 
-app.post('/showPayment', (req, res) => {
+app.post('/show/admin/Payment', (req, res) => {
     db.query(
         `SELECT * FROM payment`,
         (err, result) => {
@@ -551,12 +551,41 @@ app.post('/showPayment', (req, res) => {
     )
 })
 
+app.post('/remove/admin/paymentDetails', (req, res) => {
+    const {Id} = req.body
+    db.query(
+        `DELETE FROM  payment WHERE Id='${Id}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
 
-app.post('/tickets', (req, res) => {
+app.post('/edit/admin/paymentDetails', (req, res) => {
+    const { Id, paymentHeading, paymentContent, paymentImage, status, showImga} = req.body
+    db.query(
+        `UPDATE  payment SET paymentHeading='${paymentHeading}', paymentContent='${paymentContent}', paymentImage='${paymentImage}', status='${status}',showImga='${showImga}' WHERE Id='${Id}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
 
-    const { userId, subject, message } = req.body;
-    db.query(`INSERT INTO tickets (userId, subject, message) VALUES (?,?,?)`,
-        [userId, subject, message],
+app.post('/user/tickets', (req, res) => {
+
+    const { userId, name, email, phone, subject, message, status } = req.body;
+    db.query(`INSERT INTO tickets (userId, name, email, phone, subject, message, status) VALUES (?,?,?,?,?,?,?)`,
+        [userId, name, email, phone, subject, message, status],
         (err, result) => {
             if (err) {
                 res.status(400).json(err);
@@ -564,6 +593,47 @@ app.post('/tickets', (req, res) => {
             else {
                 res.status(200).json('Successfully');
             }
+        }
+    )
+})
+
+app.post('/show/admin/Ticket', (req, res) => {
+    db.query(
+        `SELECT * FROM tickets`,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
+app.post('/remove/admin/userTickets', (req, res) => {
+
+    const {Id} = req.body
+
+    db.query(
+        `DELETE FROM  tickets  WHERE userId='${Id}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
+app.post('/edit/admin/ticketDetails', (req, res) => {
+    const { ticketId, name, email, phone, subject, message, status} = req.body
+    db.query(
+        `UPDATE  tickets SET name='${name}', email='${email}', phone='${phone}', status='${status}', subject='${subject}', message='${message}'  WHERE Id='${ticketId}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
         }
     )
 })
@@ -648,9 +718,9 @@ app.post('/showUserAdmin', (req, res) => {
 app.post('/showAddressAdmin', (req, res) => {
 
     const {userId} = req.body
-    console.log(userId);
+    console.log(userId);  
     db.query(
-        `SELECT * FROM useraddress WHERE userId = ${userId}`,
+        `SELECT * FROM useraddress WHERE userId = ${userId} AND deleteStatus = '1'`,
         (err, result) => {
             return res.json(result);
         }
@@ -662,7 +732,7 @@ app.post('/showBankAdmin', (req, res) => {
     const {userId} = req.body
     console.log(userId);
     db.query(
-        `SELECT * FROM bankdetails WHERE userId = ${userId}`,
+        `SELECT * FROM bankdetails WHERE userId = ${userId} AND userDelete ='1'`,
         (err, result) => {
             return res.json(result);
         }
