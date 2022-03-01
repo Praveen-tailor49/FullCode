@@ -49,6 +49,23 @@ app.post('/userLogin', (req, res) => {
     )
 })
 
+app.post('/user/resetPassword', (req, res) => {
+
+    const {userId, userPassword, userMobile} = req.body
+
+    db.query(
+        `UPDATE  users SET userPassword='${userPassword}'  WHERE userId='${userId}' AND userMobile  = '${userMobile}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
 app.post('/blankDetails', (req, res) => {
 
     const {userId, actualName, ifseCode, bankName, accountNumber, state, city, address, mobileNumber, email, upiAccount, userStatus, userDelete } = req.body
@@ -598,8 +615,19 @@ app.post('/user/tickets', (req, res) => {
 })
 
 app.post('/show/admin/Ticket', (req, res) => {
+    
     db.query(
-        `SELECT * FROM tickets`,
+        `SELECT * FROM tickets `,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
+app.post('/show/user/Ticket', (req, res) => {
+    const {userId} = req.body
+    db.query(
+        `SELECT * FROM tickets WHERE userId='${userId}'`,
         (err, result) => {
             return res.json(result);
         }
