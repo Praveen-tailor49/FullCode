@@ -240,6 +240,7 @@ const AddBankCard = ({baseUrl}) => {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 val={userBankInfo.val}
+                userId= {localStorage.getItem('token')}
             />
             <Footer />
         </>

@@ -89,17 +89,17 @@ function App() {
           <Route path='/mine' element={<AuthUser cmp={MinePage} baseUrl={baseUrl}/>}/>
           <Route path='/privacy/policy' element={<AuthUser cmp={PrivacyPolicy}/>}/>
           {/* <Route path='/reset/password' element={<AuthUser cpm={ResetPassword}/>}/> */}
-          <Route path='/add/address' element={<AuthUser cmp={AddAddress}/>}/>
-          <Route path='/add/bank' element={<AuthUser cmp={AddBankCard}/>}/>
-          <Route path='/withdrawal' element={<AuthUser cmp={Withdrawal}/>}/>
-          <Route path='/orders' element={<AuthUser cmp={Orders}/>}/>
-          <Route path='/ComplaintsSuggestions' element={<AuthUser cmp={ComplaintsSuggestions}/>}/>
+          <Route path='/add/address' element={<AuthUser cmp={AddAddress}  baseUrl={baseUrl}/>}/>
+          <Route path='/add/bank' element={<AuthUser cmp={AddBankCard} baseUrl={baseUrl} />}/>
+          <Route path='/withdrawal' element={<AuthUser cmp={Withdrawal} />}/>
+          <Route path='/orders' element={<AuthUser cmp={Orders} />}/>
+          <Route path='/ComplaintsSuggestions' element={<AuthUser cmp={ComplaintsSuggestions} />}/>
           <Route path='/promotion' element={<AuthUser cmp={Promotion}  baseUrl={baseUrl}/>}/>
           <Route path='/transactions' element={<AuthUser cmp={Transactions}/>}/>
           <Route path='/RiskDisclosure' element={<AuthUser cmp={RiskDisclosureAgreement}/>}/>
           <Route path='/recharge' element={<AuthUser cmp={Recharge}/>}/>
-          <Route path='/payment' element={<AuthUser cmp={Payment}/>}/>
-          <Route path='/user/ticket' element={<Ticket/>}/>
+          <Route path='/payment' element={<AuthUser cmp={Payment}  baseUrl={baseUrl}/>}/>
+          <Route path='/user/ticket' element={<AuthUser  cmp={Ticket}  baseUrl={baseUrl}/>}/>
       </Routes>
         
     </>

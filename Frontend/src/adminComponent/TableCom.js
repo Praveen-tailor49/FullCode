@@ -163,7 +163,7 @@ const TableCom = ({baseUrl}) => {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "userId": id
+            "Id": id
         });
 
         var requestOptions = {

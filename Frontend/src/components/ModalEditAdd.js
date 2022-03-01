@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { Modal, Button, Container, Form } from 'react-bootstrap';
 
 
@@ -7,6 +7,13 @@ const ModalWin = (props) => {
     const [userBankInfo, setUserBankInfo] = useState({
         userId: localStorage.getItem('token'), actualName: props.val.actualName, ifseCode: props.val.ifseCode, bankName: props.val.bankName, accountNumber: props.val.accountNumber, state: props.val.state, city: props.val.city, address: props.val.address, mobileNumber: props.val.mobileNumber, email: props.val.email, upiAccount: props.val.upiAccount, userStatus: '0', userDelete: '1'
     })
+
+    useEffect(()=>{
+        setUserBankInfo({
+            userId: props.val.userId
+            ,actualName: props.val.actualName, ifseCode: props.val.ifseCode, bankName: props.val.bankName, accountNumber: props.val.accountNumber, state: props.val.state, city: props.val.city, address: props.val.address, mobileNumber: props.val.mobileNumber, email: props.val.email, upiAccount: props.val.upiAccount,
+        })
+    },[])
     // const [show, setShow] = useState(false)
 
     const HandlShow = (e) => {
@@ -17,6 +24,10 @@ const ModalWin = (props) => {
             ...prastate,
             [name]: value,
         }))
+    }
+
+    const editBank = () => {
+
     }
 // console.log( props.val.actualName);
     return (
@@ -78,7 +89,8 @@ const ModalWin = (props) => {
                             </Form>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button onClick={props.onHide}>Save</Button>
+                            <Button onClick={props.onHide}>Back</Button>
+                            <Button onClick={(e) => editBank(e)}>Save</Button>
                         </Modal.Footer>
                     </Modal>
                 </Container>
