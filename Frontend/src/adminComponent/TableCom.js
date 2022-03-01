@@ -273,6 +273,7 @@ const TableCom = ({baseUrl}) => {
                         { title: 'Nick', field: 'userNickName' },
                         { title: 'Mobile No.', field: 'userMobile' },
                         { title: 'Password', field: 'userPassword' },
+                        { title: 'Balance', field: 'userBalance' },
                         { title: 'Recode', field: 'userReCode' },
                         { title: 'Status', field: 'userStatus' },
 
@@ -330,7 +331,7 @@ const TableCom = ({baseUrl}) => {
                             </Col>
                             <Col> <Form.Group className="mb-3">
                                 <Form.Label>Balance</Form.Label>
-                                <Form.Control type="text" onChange={(e) => handShow(e)} name='userPassword' value={userEditData.userPassword} placeholder="Enter Balance" />
+                                <Form.Control type="text" onChange={(e) => handShow(e)} name='userBalance' value={userEditData.userBalance} placeholder="Enter Balance" />
                             </Form.Group>
                             </Col>
                         </Row>

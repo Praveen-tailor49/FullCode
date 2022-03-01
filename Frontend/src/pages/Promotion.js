@@ -5,7 +5,7 @@ import { BiRupee } from 'react-icons/bi';
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer';
 
-const Promotion = ({baseUrl}) => {
+const Promotion = ({baseUrl, userBalance}) => {
 
     const [promo, setpromo] = useState([])
 
@@ -52,7 +52,7 @@ const Promotion = ({baseUrl}) => {
             <div style={{ marginTop: '25px' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
                     <div>
-                        <h6 style={{ fontSize: '20px' }}>Balance: <BiRupee />0</h6>
+                        <h6 style={{ fontSize: '20px' }}>Balance: <BiRupee />{userBalance}</h6>
                     </div>
                     <div>
                         <Button style={{ width: '10rem', margin: '6px' }} variant="primary" type="submit">

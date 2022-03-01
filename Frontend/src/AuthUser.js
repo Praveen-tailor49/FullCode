@@ -2,7 +2,7 @@ import React, { useEffect} from 'react'
 import {  useNavigate } from 'react-router-dom';
 
 
-const AuthUser = ({cmp, baseUrl}) => {
+const AuthUser = ({cmp, baseUrl, userData, userBalance}) => {
 
     const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const AuthUser = ({cmp, baseUrl}) => {
 
     return (
         <>
-            <Cmp  baseUrl={baseUrl}/>
+            <Cmp  baseUrl={baseUrl} userData={userData} userBalance={userBalance}/>
         </>
     )
 }

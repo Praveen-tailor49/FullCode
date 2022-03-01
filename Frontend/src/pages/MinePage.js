@@ -4,10 +4,10 @@ import Footer from '../components/Footer';
 import MineNav from '../components/MineNav';
 
 
-const MinePage = ({baseUrl}) => {
+const MinePage = ({baseUrl, userData}) => {
     return (
         <>
-           <MineNav baseUrl={baseUrl} />
+           <MineNav baseUrl={baseUrl} userData={userData} />
             
             <MineDropdown/>
 
