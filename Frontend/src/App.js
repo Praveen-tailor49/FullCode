@@ -7,6 +7,9 @@ import { Register } from './pages/Register';
 import Win from './pages/Win';
 import MinePage from './pages/MinePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Terms from './pages/Terms';
+import About from './pages/About';
+
 import ResetPassword  from './pages/ResetPassword';
 import AddAddress from './pages/AddAddress';
 import AddBankCard from './pages/AddBankCard';
@@ -116,6 +119,8 @@ function App() {
           <Route path='/win' element={<AuthUser cmp={Win} />}/>
           <Route path='/mine' element={<AuthUser cmp={MinePage} baseUrl={baseUrl} userData={userData}/>}/>
           <Route path='/privacy/policy' element={<AuthUser cmp={PrivacyPolicy}/>}/>
+          <Route path='/terms/condition' element={<AuthUser cmp={Terms}/>}/>
+          <Route path='/about' element={<AuthUser cmp={About}/>}/>
           {/* <Route path='/reset/password' element={<AuthUser cpm={ResetPassword}/>}/> */}
           <Route path='/add/address' element={<AuthUser cmp={AddAddress}  baseUrl={baseUrl}/>}/>
           <Route path='/add/bank' element={<AuthUser cmp={AddBankCard} baseUrl={baseUrl} />}/>
