@@ -197,11 +197,12 @@ app.post('/show/user/Promo', (req, res) => {
 
 //Surbhi's work
 
-app.post('/page', (req, res) => {
 
-    const { pageName, pageHeading, pageDescription, pageExplain } = req.body;
-    db.query(`INSERT INTO page (pageName, pageHeading, pageDescription, pageExplain) VALUES (?,?,?,?)`,
-        [pageName, pageHeading, pageDescription, pageExplain],
+app.post('/aboutpage', (req, res) => {
+
+    const { aboutContent} = req.body;
+    db.query(`INSERT INTO aboutpage (aboutContent) VALUES (?)`,
+        [aboutContent],
         (err, result) => {
             if (err) {
                 res.status(400).json(err);
@@ -209,6 +210,163 @@ app.post('/page', (req, res) => {
             else {
                 res.status(200).json('Successfully');
             }
+        }
+    )
+})
+
+app.get('/show/about', (req, res) => {
+    db.query(
+        `SELECT * FROM aboutpage`,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
+
+app.post('/update/about/page', (req, res) => {
+
+    const {pageId,aboutContent} = req.body
+
+    db.query(
+        `UPDATE  aboutpage SET aboutContent='${aboutContent }' WHERE Id='${pageId}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
+app.post('/termspage', (req, res) => {
+
+    const { termsContent } = req.body;
+    db.query(`INSERT INTO termspage (termsContent) VALUES (?)`,
+        [termsContent],
+        (err, result) => {
+            if (err) {
+                res.status(400).json(err);
+            }
+            else {
+                res.status(200).json('Successfully');
+            }
+        }
+    )
+})
+
+app.get('/show/terms', (req, res) => {
+    db.query(
+        `SELECT * FROM termspage`,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
+
+
+app.post('/update/terms/page', (req, res) => {
+
+    const {termsId,termsContent} = req.body
+
+    db.query(
+        `UPDATE  termspage SET termsContent='${termsContent }' WHERE Id='${termsId}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
+app.post('/privacypage', (req, res) => {
+
+    const { privacyContent } = req.body;
+    db.query(`INSERT INTO privacypage (privacyContent) VALUES (?)`,
+        [privacyContent],
+        (err, result) => {
+            if (err) {
+                res.status(400).json(err);
+            }
+            else {
+                res.status(200).json('Successfully');
+            }
+        }
+    )
+})
+
+app.get('/show/privacy', (req, res) => {
+    db.query(
+        `SELECT * FROM privacypage`,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
+
+app.post('/update/privacy/page', (req, res) => {
+
+    const {privacyId,privacyContent} = req.body
+
+    db.query(
+        `UPDATE  privacypage SET privacyContent='${privacyContent }' WHERE Id='${privacyId}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
+app.post('/rolepage', (req, res) => {
+
+    const { roleContent } = req.body;
+    db.query(`INSERT INTO rolepage (roleContent) VALUES (?)`,
+        [roleContent],
+        (err, result) => {
+            if (err) {
+                res.status(400).json(err);
+            }
+            else {
+                res.status(200).json('Successfully');
+            }
+        }
+    )
+})
+
+app.get('/show/role', (req, res) => {
+    db.query(
+        `SELECT * FROM rolepage`,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
+
+app.post('/update/role/page', (req, res) => {
+
+    const {roleId,roleContent} = req.body
+
+    db.query(
+        `UPDATE  rolepage SET roleContent='${roleContent }' WHERE Id='${roleId}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
         }
     )
 })
@@ -317,6 +475,24 @@ app.post('/showResult', (req, res) => {
         }
     )
 })
+
+app.post('/updateResult', (req, res) => {
+    const { resultID, record, updateResult } = req.body;
+    console.log(resultID);
+    
+    db.query(
+        `UPDATE result SET record= '${record}', result='${updateResult}' WHERE Id='${resultID}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
 
 app.post('/rules', (req, res) => {
 
