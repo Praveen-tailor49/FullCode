@@ -104,7 +104,7 @@ fetch("http://localhost:5000/showResult", requestOptions)
                     {
                         icon: 'remove',
                         tooltip: 'Remove Result',
-                        onClick: (event, rowData) => alert("You saved " + rowData.name)
+                        onClick: (event, rowData) => alert("You saved  " + rowData.name)
                     },
                     {
                         icon: 'edit',

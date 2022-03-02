@@ -445,9 +445,9 @@ app.post('/remove/promotion', (req, res) => {
 
 app.post('/orders', (req, res) => {
 
-    const { userId, timePeriod, cardtype, amount } = req.body;
-    db.query(`INSERT INTO orders (userId, timePeriod, cardtype, amount) VALUES (?,?,?,?)`,
-        [userId, timePeriod, cardtype, amount],
+    const { userId, userName, time, Period, cardtype, amount } = req.body;
+    db.query(`INSERT INTO orders (userId, userName, time, Period, cardtype, amount) VALUES (?,?,?,?)`,
+        [userId, userName, time, Period, cardtype, amount],
         (err, result) => {
             if (err) {
                 res.status(400).json(err);
@@ -513,9 +513,9 @@ app.post('/updateResult', (req, res) => {
 
 app.post('/rules', (req, res) => {
 
-    const { rules, status } = req.body;
-    db.query(`INSERT INTO rules (rules, status) VALUES (?,?)`,
-        [rules, status],
+    const { rules } = req.body;
+    db.query(`INSERT INTO rules (rules) VALUES (?)`,
+        [rules],
         (err, result) => {
             if (err) {
                 res.status(400).json(err);
@@ -523,6 +523,15 @@ app.post('/rules', (req, res) => {
             else {
                 res.status(200).json('Successfully');
             }
+        }
+    )
+})
+
+app.get('/showRules', (req, res) => {
+    db.query(
+        `SELECT * FROM rules`,
+        (err, result) => {
+            return res.json(result);
         }
     )
 })
@@ -764,6 +773,18 @@ app.post('/showBankAdmin', (req, res) => {
         (err, result) => {
             return res.json(result);
         }
+    )
+})
+
+app.post('/adminLogin', (req, res) => {
+    const { email, password } = req.body;
+
+    if(email === '' || password === ''){
+        res.send('empty feild ')
+    } else if(email === 'admin123@gmail.com' && password === 'admin123'){
+        res.send('Successfully')
+    } else (
+        res.send('user not found')
     )
 })
 

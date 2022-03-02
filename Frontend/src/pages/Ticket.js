@@ -62,7 +62,7 @@ const Ticket = ({baseUrl}) => {
 
             <div style={{ display: "flex", justifyContent: "center", marginTop: "5rem" }}>
                 <Card style={{ width: "50rem", height: "30rem", boxShadow: "10px 10px 5px lightgray" }} >
-                    <h3 style={{ textAlign: "center", color: "gray", marginTop: "40px", textShadow: "2px 2px lightgray" }}>Contact</h3>
+                    <h3 style={{ textAlign: "center", color: "gray", marginTop: "40px", textShadow: "2px 2px lightgray" }}>Tickets</h3>
                     <hr ></hr>
                     <Row style={{ margin: "auto" }}>
 
@@ -94,7 +94,7 @@ const Ticket = ({baseUrl}) => {
                     <div style={{ padding: '30px', margin: "auto" }}>
 
                         <Button variant="primary" style={{ width: '13rem' }} onClick={(e) => sendTicket(e)} >
-                            Continue
+                            Submit
                         </Button>
                     </div>
 

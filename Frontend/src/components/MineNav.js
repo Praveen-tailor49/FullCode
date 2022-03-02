@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Navbar } from 'react-bootstrap';
+import { Navbar, Nav, Container } from 'react-bootstrap';
 import { BiRupee } from 'react-icons/bi';
 
 const MineNav = ({baseUrl }) => {
@@ -34,10 +34,13 @@ const MineNav = ({baseUrl }) => {
     return (
         <>
             <div>
-                <Navbar bg="primary" variant="dark">
-                    <div>
-                        <Navbar.Brand style={{ marginLeft: '30px' }}>Mine</Navbar.Brand>
-                    </div>
+                    <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+  <Container style={{marginLeft:'2rem',marginRight:'0.1rem'}}>
+  <Navbar.Brand href="#home" >Mine</Navbar.Brand>
+    <Nav>
+      <Nav.Link href="#deets" style={{color:"white", fontSize:"20px", fontWeight:"10px"}}>Logout</Nav.Link>
+    </Nav>
+  </Container>
 
                     {/* <div style={{ display: 'flex', justifyContent: 'flex-end', color: 'white' }} >
                         <div>
