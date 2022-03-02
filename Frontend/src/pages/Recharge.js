@@ -6,7 +6,7 @@ import { RiWallet3Fill } from 'react-icons/ri'
 import Footer from '../components/Footer'
 
 
-function Recharge() {
+function Recharge({userBalance}) {
   return (
     <>
       <div>
@@ -21,7 +21,7 @@ function Recharge() {
           <p style={{ color: "white", fontSize: "1rem", padding: "0.4rem" }}>!  Note: If the recharge amount is deducted but amountis not added to the account, please send a detailed screenshot of payment and game ID to the mailbox for processing </p>
         </Navbar>
         <h3 style={{ color: "#fc8d38", textAlign: "center" }}>Any Problem? Contact:<span style={{ color: "#0288d1" }}>Whatsapp</span></h3>
-        <h2 style={{ textAlign: "center" }}>Balance: 0.00</h2>
+        <h2 style={{ textAlign: "center" }}>Balance: {userBalance}</h2>
         <div style={{ borderRadius: "0.5rem", boxShadow: "0px 5px 8px 0px #888888", width: "80%", margin: "2rem", paddingLeft: "2rem" }}>
           <RiWallet3Fill style={{ color: "gray" }} />
           <input placeholder='Please select recharge amount' style={{ width: "80%", height: "3rem", border: "none" }} /></div>

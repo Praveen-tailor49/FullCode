@@ -88,14 +88,21 @@ function MineDropdown() {
                         <Dropdown>
                             <Dropdown.Toggle style={{ width: '98vw', textAlign: 'inherit' }} id="dropdown-button-dark-example1" variant="light">
                                 
-                                About
+                                Page
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu variant="light" style={{ width: '98vw' }}>
                                 <Dropdown.Item active>
+                                <Link to='/about' style={{color:'black', textDecoration:'none'}}>About</Link>
+                                </Dropdown.Item>
+                                <Dropdown.Item > <Link to='/terms/condition' style={{color:'black', textDecoration:'none'}}>Terms & Conditions </Link></Dropdown.Item>
+                                <Dropdown.Item active>
                                 <Link to='/privacy/policy' style={{color:'black', textDecoration:'none'}}>Privacy Policy</Link>
                                 </Dropdown.Item>
                                 <Dropdown.Item > <Link to='/RiskDisclosure' style={{color:'black', textDecoration:'none'}}>Risk Disclosure Agreement </Link></Dropdown.Item>
+
+                           
+                           
                             </Dropdown.Menu>
                         </Dropdown>
                     </div>

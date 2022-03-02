@@ -121,7 +121,7 @@ const AdminPage = () => {
                             <Item
                                 onClick={() => setClick(true)}
                                 activeClassName="active"
-                                to="/user/ticket"
+                                to="/admin/ticket"
                             >
                                 <GoRequestChanges />
                                 <Text clicked={click}>Tickets</Text>

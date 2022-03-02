@@ -1,9 +1,9 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BiRupee, BiRefresh } from 'react-icons/bi';
 import { AiFillTrophy } from 'react-icons/ai';
 // import { HiOutlineCurrencyRupee } from 'react-icons/hi';
 
-import { Button, Container,Card,Row,Col} from 'react-bootstrap';
+import { Button, Container, Card, Row, Col } from 'react-bootstrap';
 // import ModalWin from './ModalWin';
 import ModalReadRule from './ModalReadRule';
 import { Link } from 'react-router-dom'
@@ -37,16 +37,16 @@ const WinHeader = () => {
     const [modalShow2, setModalShow2] = useState(false);
     const [valueRupess, setValueRupess] = useState('10');
     const [cardValue, setCardValue] = useState('');
-    
-   useEffect(()=>{
-    document.getElementById("img10").style.boxShadow="0px 0px 30px 2px green"
-   },[])
 
-   const showModal2 = (val) => {
-    
+    useEffect(() => {
+        document.getElementById("img10").style.boxShadow = "0px 0px 30px 2px green"
+    }, [])
+
+    const showModal2 = (val) => {
+
         setCardValue(val)
         setModalShow2(true)
-        
+
         if (val === 'tie') {
             document.getElementById('tie').style.boxShadow = '0px 0px 30px 2px  green';
         } else {
@@ -65,47 +65,47 @@ const WinHeader = () => {
             document.getElementById('bahar').style.boxShadow = '1px 1px gray';
         }
 
-        
+
     }
     const showDiv = (val) => {
-        
+
         setValueRupess(val)
 
-        if (val==="10") {
-            document.getElementById("img10").style.boxShadow="0px 0px 30px 2px #ACA44C"
+        if (val === "10") {
+            document.getElementById("img10").style.boxShadow = "0px 0px 30px 2px #ACA44C"
         }
         else {
-            document.getElementById("img10").style.boxShadow="1px  1px grey"
+            document.getElementById("img10").style.boxShadow = "1px  1px grey"
 
         }
-        if (val==="100") {
-            document.getElementById("img100").style.boxShadow="0px 0px 30px 2px #f4b424"
-        }else {
-            document.getElementById("img100").style.boxShadow="1px  1px grey"
+        if (val === "100") {
+            document.getElementById("img100").style.boxShadow = "0px 0px 30px 2px #f4b424"
+        } else {
+            document.getElementById("img100").style.boxShadow = "1px  1px grey"
 
-        } if (val==="500") {
-            document.getElementById("img500").style.boxShadow="0px 0px 30px 2px #EC1C54"
-        }else {
-            document.getElementById("img500").style.boxShadow="1px  1px grey"
+        } if (val === "500") {
+            document.getElementById("img500").style.boxShadow = "0px 0px 30px 2px #EC1C54"
+        } else {
+            document.getElementById("img500").style.boxShadow = "1px  1px grey"
 
-        } if (val==="1000") {
-            document.getElementById("img1000").style.boxShadow="0px 0px 30px 2px #BC4C9C"
-        }else {
-            document.getElementById("img1000").style.boxShadow="1px  1px grey"
+        } if (val === "1000") {
+            document.getElementById("img1000").style.boxShadow = "0px 0px 30px 2px #BC4C9C"
+        } else {
+            document.getElementById("img1000").style.boxShadow = "1px  1px grey"
 
-        } if (val==="10000") {
-            document.getElementById("img10000").style.boxShadow="0px 0px 30px 2px #14BC9C"
-        }else {
-            document.getElementById("img10000").style.boxShadow="1px  1px grey"
+        } if (val === "10000") {
+            document.getElementById("img10000").style.boxShadow = "0px 0px 30px 2px #14BC9C"
+        } else {
+            document.getElementById("img10000").style.boxShadow = "1px  1px grey"
 
-        }if (val==="green") {
-            document.getElementById("green").style.boxShadow="0px 0px 30px 2px green"
-        }else {
-            document.getElementById("green").style.boxShadow="1px  1px grey"
+        } if (val === "green") {
+            document.getElementById("green").style.boxShadow = "0px 0px 30px 2px green"
+        } else {
+            document.getElementById("green").style.boxShadow = "1px  1px grey"
 
         }
-    
-        
+
+
         // else {
         //     toast.error('Please Select a Card First. From A/B/T', {
         //         position: "top-right",
@@ -145,24 +145,24 @@ const WinHeader = () => {
 
             <div style={{ backgroundColor: '#DCDCDC	' }}>
                 <div style={{ display: 'flex', padding: '10px', justifyContent: 'space-around' }}>
-               
-                    
+
+
                     <div>
-                    <Row>
-                    <Col style={{marginRight:"-25px"}}>
-                     
-                    < AiFillTrophy/>
-                  
-                    </Col>
-                    <Col>
-                    <div style={{ marginLeft: '10px'}}>
-                     
-                         
-                        <h4>Period</h4>
-                        <h5>20220210208</h5>
-                    </div>
-                    </Col>
-                    </Row>
+                        <Row>
+                            <Col style={{ marginRight: "-25px" }}>
+
+                                < AiFillTrophy />
+
+                            </Col>
+                            <Col>
+                                <div style={{ marginLeft: '10px' }}>
+
+
+                                    <h4>Period</h4>
+                                    <h5>20220210208</h5>
+                                </div>
+                            </Col>
+                        </Row>
                     </div>
 
                     <div style={{ marginLeft: '55px' }}>
@@ -170,50 +170,50 @@ const WinHeader = () => {
                         <h4>02:49</h4>
                     </div>
                 </div>
-               
+
 
                 <div style={{ display: "flex", justifyContent: 'center', borderRadius: "25px" }}>
 
-                
-                
-                    <CardDiv id="tie" onClick={()=>showModal2('tie')} style={{ 
-                        width: '58rem', height: "10rem", backgroundColor: "green", borderRadius: "25px",
+
+
+                    <CardDiv id="tie" onClick={() => showModal2('tie')} style={{
+                        width: '58rem',  backgroundColor: "green", borderRadius: "25px",
                         border: "5px solid #e4d00a", marginBottom: "5px"
-                    }}><div className='main1' style={{height: "1.5rem", borderRadius: "25px 26px 0px 0px", backgroundColor: "darkgreen", display: "flex", justifyContent: "space-between" }} >
-                       </div>
-                            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "gray", fontSize: "40px" }} >TIE</div>
+                    }}><div className='main1' style={{ height: "1.5rem", borderRadius: "25px 26px 0px 0px", backgroundColor: "darkgreen", display: "flex", justifyContent: "space-between" }} >
+                        </div>
+                        <FontSize >TIE</FontSize>
                         <Card.Img variant="top" src="" />
 
                     </CardDiv>
 
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                    <CardDiv  id="andar" onClick={()=>showModal2('andar')}style={{
-                        width: '29rem', height: "10rem", borderRadius: "25px 25px 25px 180px", backgroundColor: "blue",
+                    <CardDiv id="andar" onClick={() => showModal2('andar')} style={{
+                        width: '29rem',  borderRadius: "25px 25px 25px 180px", backgroundColor: "blue",
                         border: "5px solid #e4d00a", marginRight: "4px", marginBottom: "10px"
-                    }}><div style={{  height: "1.5rem", borderRadius: "25px 26px 0px 0px", backgroundColor: "darkblue", display: "flex", justifyContent: "space-between" }}>
-                        <div style={{display:'flex'}}>
+                    }}><div style={{ height: "1.5rem", borderRadius: "10px 10px 5px 4px", backgroundColor: "darkblue", display: "flex", justifyContent: "space-between" }}>
+                            <div style={{ display: 'flex' }}>
 
-                            
-                            {/* <div style={{ color: "white", marginRight: "8px" }}>Can bet:415710624</div> */}
+
+                                {/* <div style={{ color: "white", marginRight: "8px" }}>Can bet:415710624</div> */}
                             </div>
                         </div>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "gray", fontSize: "40px" }} >Andar</div>
+                        <FontSize >Andar</FontSize>
                         <Card.Img variant="top" src="" />
 
                     </CardDiv>
-                    <CardDiv  id="bahar" onClick={()=>showModal2('bahar')}style={{
-                        width: '29rem', height: "10rem", borderRadius: "25px 25px 180px 25px",
+                    <CardDiv id="bahar" onClick={() => showModal2('bahar')} style={{
+                        width: '29rem',  borderRadius: "25px 25px 180px 25px",
                         backgroundColor: "red",
                         border: "5px solid #e4d00a"
-                    }}><div style={{  height: "1.5rem", borderRadius: "25px 26px 0px 0px", backgroundColor: "darkred", display: "flex", justifyContent: "space-between" }}>
-                        <div  style={{display:'flex'}}>
+                    }}><div style={{ height: "1.5rem", borderRadius: "10px 10px 5px 0px", backgroundColor: "darkred", display: "flex", justifyContent: "space-between" }}>
+                            <div style={{ display: 'flex' }}>
 
-                        
-                        {/* <div style={{ color: "white", marginRight: "8px" }}>Can bet:415710624</div> */}
+
+                                {/* <div style={{ color: "white", marginRight: "8px" }}>Can bet:415710624</div> */}
+                            </div>
                         </div>
-                        </div>
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "gray", fontSize: "40px" }} >Bahar</div>
+                        <FontSize >Bahar</FontSize>
                         <Card.Img variant="top" src="" />
 
                     </CardDiv>
@@ -226,7 +226,7 @@ const WinHeader = () => {
                 <Container>
                     <CoinCnterDiv>
                         <div >
-                            <img id='img10' src={coin10} style={{ boxShadow: '1px 1px gray', width: '5rem', borderRadius: '50rem', background: '#AAA64D' }} alt='coin10'  onClick={() => showDiv('10')} />
+                            <img id='img10' src={coin10} style={{ boxShadow: '1px 1px gray', width: '5rem', borderRadius: '50rem', background: '#AAA64D' }} alt='coin10' onClick={() => showDiv('10')} />
                         </div>
                         <div >
                             <img id="img100" src={coin1} style={{ boxShadow: '1px 1px gray', width: '5rem', borderRadius: '50rem', background: '#F6B527' }} alt='coin1' onClick={() => showDiv('100')} />
@@ -237,13 +237,13 @@ const WinHeader = () => {
                         <div >
                             <img id="img1000" src={coin3} style={{ boxShadow: '1px 1px gray', width: '5rem', borderRadius: '50rem', background: '#BB4D9D' }} alt='coin3' onClick={() => showDiv('1000')} />
                         </div>
-                       
-                        
+
+
                         <div >
                             <img id="img10000" src={coin6} style={{ boxShadow: '1px 1px gray', width: '5rem', borderRadius: '50rem', background: '#10B99D' }} alt='coin6' onClick={() => showDiv('10000')} />
                         </div>
-                        
-                       
+
+
 
                         {/* <div >
                             <img src={custom} style={{ boxShadow: '1px 1px gray', width: '5rem', borderRadius: '50rem', background: '#AAA64D' }} alt='coin8' onClick={() => setModalShow(true)} />
@@ -281,17 +281,22 @@ export default WinHeader
 const CardDiv = styled.div`
 margin: 0.4rem;
 cursor:pointer;
-
+height: 7rem;
+@media screen and (min-width: 767px) {
+    height: 10rem;
+  }
 
 `;
 
-const CardImg = styled.img`
-box-shadow: 1px 1px gray;
-width: 5rem; 
-border-radius: 0.5rem;
+const FontSize = styled.div`
+display: flex;
+justify-content: center;
+ align-items: center;
+ color: gray;
+ font-size: 40px;
 
-@media screen and (min-width: 768px) {
-    width: 12rem; 
+ @media screen and (max-width: 426px) {
+    font-size: 30px;
   }
 
 `;

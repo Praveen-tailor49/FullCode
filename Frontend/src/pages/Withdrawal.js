@@ -5,7 +5,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer';
 
-const Withdrawal = () => {
+const Withdrawal = ({userBalance}) => {
     return (
         <>
             <div>
@@ -31,7 +31,7 @@ const Withdrawal = () => {
             <div style={{ marginTop: '15px' }}>
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <div>
-                        <h6 style={{ fontSize: '30px' }}>Balance: <BiRupee />0.00 </h6>
+                        <h6 style={{ fontSize: '30px' }}>Balance: <BiRupee /> {userBalance} </h6>
                     </div>
                 </div>
 

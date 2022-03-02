@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Routes, Route} from 'react-router-dom'
@@ -7,6 +7,9 @@ import { Register } from './pages/Register';
 import Win from './pages/Win';
 import MinePage from './pages/MinePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import Terms from './pages/Terms';
+import About from './pages/About';
+
 import ResetPassword  from './pages/ResetPassword';
 import AddAddress from './pages/AddAddress';
 import AddBankCard from './pages/AddBankCard';
@@ -34,12 +37,40 @@ import Promotions from './adminPages/Promotions';
 import Wallet from './adminPages/Wallet'
 import Tickets from './adminPages/Tickets'
 import Gamesetting from './adminPages/Gamesetting'
+import LoginAdmin from './adminPages/Login'
 import Ticket from './pages/Ticket';
 // import AdminLogin from './adminPages/AdminLogin'
 
 function App() {
 
   const baseUrl = 'http://localhost:5000/';
+  const [userData, setUserData] = useState([])
+  const [userBalance, setUserBalance] = useState('')
+
+    useEffect(() => {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+          "userId": localStorage.getItem('token')
+      });
+
+      var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+      };
+
+      fetch(baseUrl + "showUserAdmin", requestOptions)
+          .then(response => response.json())
+          .then(result => {
+            setUserBalance(result[0].userBalance)
+            setUserData(result)
+          })
+          .catch(error => console.log('error', error));
+  }, [])
+
 
   return (
     <>
@@ -48,7 +79,7 @@ function App() {
           <Route path='*' element={<Error404 />} />
           <Route exact path='/Win2' element={<WinTwo/>}/>
           <Route exact path='/register' element={<Register baseUrl={baseUrl}/>}/>
-          <Route path='/reset/password' element={<ResetPassword/>}/>
+          <Route path='/reset/password' element={<ResetPassword  baseUrl={baseUrl}/>}/>
           <Route path='/home' element={<Home/>}/>
           {/* <Route path='/win' element={<Win />}/>
           <Route path='/mine' element={<MinePage/>}/>
@@ -66,9 +97,9 @@ function App() {
 
 
           {/* Admin pages */}
-
+          <Route path='/admin/login' element={<LoginAdmin baseUrl={baseUrl}/>}/>
           <Route path='/admin' element={<AdminPage baseUrl={baseUrl}/>}/>
-          <Route path='/user/management' element={<UserManagement baseUrl={baseUrl}/>}/>
+          <Route path='/user/management' element={<UserManagement baseUrl={baseUrl} />}/>
           <Route path='/user/pages' element={<Pages baseUrl={baseUrl}/>}/>
           <Route path='/Promotions' element={<Promotions baseUrl={baseUrl}/>}/>
           <Route path='/Order' element={<Order baseUrl={baseUrl}/>}/>
@@ -86,20 +117,22 @@ function App() {
           {/* User Auth */}
 
           <Route path='/win' element={<AuthUser cmp={Win} />}/>
-          <Route path='/mine' element={<AuthUser cmp={MinePage} baseUrl={baseUrl}/>}/>
+          <Route path='/mine' element={<AuthUser cmp={MinePage} baseUrl={baseUrl} userData={userData}/>}/>
           <Route path='/privacy/policy' element={<AuthUser cmp={PrivacyPolicy}/>}/>
+          <Route path='/terms/condition' element={<AuthUser cmp={Terms}/>}/>
+          <Route path='/about' element={<AuthUser cmp={About}/>}/>
           {/* <Route path='/reset/password' element={<AuthUser cpm={ResetPassword}/>}/> */}
-          <Route path='/add/address' element={<AuthUser cmp={AddAddress}/>}/>
-          <Route path='/add/bank' element={<AuthUser cmp={AddBankCard}/>}/>
-          <Route path='/withdrawal' element={<AuthUser cmp={Withdrawal}/>}/>
-          <Route path='/orders' element={<AuthUser cmp={Orders}/>}/>
-          <Route path='/ComplaintsSuggestions' element={<AuthUser cmp={ComplaintsSuggestions}/>}/>
-          <Route path='/promotion' element={<AuthUser cmp={Promotion}  baseUrl={baseUrl}/>}/>
+          <Route path='/add/address' element={<AuthUser cmp={AddAddress}  baseUrl={baseUrl}/>}/>
+          <Route path='/add/bank' element={<AuthUser cmp={AddBankCard} baseUrl={baseUrl} />}/>
+          <Route path='/withdrawal' element={<AuthUser cmp={Withdrawal} userBalance={userBalance}/>}/>
+          <Route path='/orders' element={<AuthUser cmp={Orders} />}/>
+          <Route path='/ComplaintsSuggestions' element={<AuthUser cmp={ComplaintsSuggestions} baseUrl={baseUrl}/>}/>
+          <Route path='/promotion' element={<AuthUser cmp={Promotion}  baseUrl={baseUrl} userBalance={userBalance}/>}/>
           <Route path='/transactions' element={<AuthUser cmp={Transactions}/>}/>
           <Route path='/RiskDisclosure' element={<AuthUser cmp={RiskDisclosureAgreement}/>}/>
-          <Route path='/recharge' element={<AuthUser cmp={Recharge}/>}/>
-          <Route path='/payment' element={<AuthUser cmp={Payment}/>}/>
-          <Route path='/user/ticket' element={<Ticket/>}/>
+          <Route path='/recharge' element={<AuthUser cmp={Recharge} userBalance={userBalance}/>}/>
+          <Route path='/payment' element={<AuthUser cmp={Payment}  baseUrl={baseUrl}/>}/>
+          <Route path='/user/ticket' element={<AuthUser  cmp={Ticket}  baseUrl={baseUrl}/>}/>
       </Routes>
         
     </>

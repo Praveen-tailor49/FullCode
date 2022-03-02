@@ -92,6 +92,7 @@ class Richtexteditor extends React.Component {
               placeholder="write here...."
               ref="editor"
               spellCheck={true}
+              
             />
           </div>
         </div>
