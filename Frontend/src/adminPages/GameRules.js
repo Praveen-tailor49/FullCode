@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import AdminBackNav from '../adminComponent/AdminBackNav';
 import styled from 'styled-components'
 // import TextField  from '@mui/material/TextField' ;
@@ -9,6 +9,29 @@ import {Container,Col,Row,Form,Button} from "react-bootstrap"
 import Myeditor from './Myeditor'
 
 function GameRules() {
+  const [rules, setrules] = useState("");
+
+
+  const sendRules = (e) => {
+    e.preventDefault()
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({ rules: rules});
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:5000/rules", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  };
+
   return (
     <>
         <AdminBackNav/>
@@ -32,17 +55,15 @@ function GameRules() {
                     <h5>Page Content</h5>
                     </Col>
                     <Col>
-                    <Myeditor />
+                    <input onChange={(e) => setrules(e.target.value)}/>
                     </Col>
                 </Row>
                
                {/* row 3rd */}
                 <Row style={{marginTop:"2rem",marginBottom:"3rem"}}>
-                <Col xs s lg="3">
-                    <h5>Status</h5>
-                    </Col>
+               
                     <Col>
-                     <Button variant="outline-secondary">Enable</Button>{' '}
+                     <Button variant="outline-secondary" onClick={(e)=>sendRules(e)}>Submit</Button>{' '}
                     </Col>
                 </Row>
             
