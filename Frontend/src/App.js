@@ -116,7 +116,7 @@ function App() {
 
           {/* User Auth */}
 
-          <Route path='/win' element={<AuthUser cmp={Win} />}/>
+          <Route path='/win' element={<AuthUser cmp={Win} userBalance={userBalance} />}/>
           <Route path='/mine' element={<AuthUser cmp={MinePage} baseUrl={baseUrl} userData={userData}/>}/>
           <Route path='/privacy/policy' element={<AuthUser cmp={PrivacyPolicy}/>}/>
           <Route path='/terms/condition' element={<AuthUser cmp={Terms}/>}/>

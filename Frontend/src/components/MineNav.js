@@ -2,7 +2,33 @@ import React, { useEffect, useState } from 'react'
 import { Navbar } from 'react-bootstrap';
 import { BiRupee } from 'react-icons/bi';
 
-const MineNav = ({userData }) => {
+const MineNav = ({baseUrl }) => {
+
+    const [userData, setUserData] = useState([])
+  
+      useEffect(() => {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+  
+        var raw = JSON.stringify({
+            "userId": localStorage.getItem('token')
+        });
+  
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+  
+        fetch(baseUrl + "showUserAdmin", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+              setUserData(result)
+            })
+            .catch(error => console.log('error', error));
+    }, [])
+  
 
 
     return (
