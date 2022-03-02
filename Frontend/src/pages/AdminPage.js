@@ -2,19 +2,27 @@ import React from 'react'
 import { Navbar, Col, Row } from 'react-bootstrap';
 import styled from 'styled-components'
 import { AiOutlineDoubleRight, AiFillHome, AiOutlineTrophy, AiOutlineSetting } from 'react-icons/ai';
-import { BiUserCircle, BiDockTop } from 'react-icons/bi';
+import { BiUserCircle, BiLogOutCircle } from 'react-icons/bi';
 import { FaGamepad } from 'react-icons/fa';
 import { RiPagesLine } from 'react-icons/ri';
 import { BsStar, BsWallet2 } from 'react-icons/bs';
 import { MdPayments } from 'react-icons/md';
 import { GoRequestChanges } from 'react-icons/go';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import SideBarAddmin from '../components/SideBarAddmin'
 
 const AdminPage = () => {
 
+    const navigate = useNavigate()
+
     const [click, setClick] = React.useState(false);
     const handleClick = () => setClick(!click);
+
+    const logOutAdmin = () => {
+        localStorage.removeItem('adtoken')
+        navigate('/')
+    }
 
     return (
         <>
@@ -141,6 +149,14 @@ const AdminPage = () => {
                             >
                                 <AiOutlineSetting />
                                 <Text clicked={click}>Game Setting</Text>
+                            </Item>
+                            <Item
+                                onClick={() => logOutAdmin()}
+                                activeClassName="active"
+                                to="/admin/login"
+                            >
+                                <BiLogOutCircle />
+                                <Text clicked={click}>Logout</Text>
                             </Item>
                         </SlickBar>
                     </SidebarContainer>
