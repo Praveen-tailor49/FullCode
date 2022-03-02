@@ -23,7 +23,7 @@ import styled from 'styled-components'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const WinHeader = () => {
+const WinHeader = ({userBalance}) => {
     // const [modalShow, setModalShow] = useState(false);
     const [modalShow1, setModalShow1] = useState(false);
     const [modalShow2, setModalShow2] = useState(false);
@@ -79,7 +79,7 @@ const WinHeader = () => {
             </div>
             <div style={{ backgroundColor: '#6495ED', color: 'white', marginTop: '-16px' }}>
                 <div>
-                    <h6 style={{ padding: '20px' }}>Available balance: 0.00 <BiRupee /></h6>
+                    <h6 style={{ padding: '20px' }}>Available balance: {userBalance} <BiRupee /></h6>
                 </div>
 
                 <div style={{ display: 'flex', padding: '10px', justifyContent: 'center' }}>
