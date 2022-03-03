@@ -10,7 +10,6 @@ import { MdPayments } from 'react-icons/md';
 import { GoRequestChanges } from 'react-icons/go';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-// import SideBarAddmin from '../components/SideBarAddmin'
 
 const AdminPage = () => {
 
@@ -27,9 +26,6 @@ const AdminPage = () => {
     return (
         <>
             <div>
-
-                {/* Navbar */}
-
                 <div>
                     <NavbarDiv bg="light" expand="lg" >
                         
@@ -102,14 +98,6 @@ const AdminPage = () => {
                                 <BsStar />
                                 <Text clicked={click}>Game Result</Text>
                             </Item>
-                            {/* <Item
-                                onClick={() => setClick(true)}
-                                activeClassName="active"
-                                to="/GameTC"
-                            >
-                                <BiDockTop />
-                                <Text clicked={click}>Game T/C</Text>
-                            </Item> */}
                             <Item
                                 onClick={() => setClick(true)}
                                 activeClassName="active"
@@ -161,9 +149,6 @@ const AdminPage = () => {
                         </SlickBar>
                     </SidebarContainer>
                 </Containers>
-                {/* <Component>
-                    
-                </Component> */}
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <div style={{ marginTop: '15rem', padding: '3rem' }}>
                         <h4>Welcome Dashboard </h4>

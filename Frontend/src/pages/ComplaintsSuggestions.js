@@ -57,7 +57,6 @@ const ComplaintsSuggestions = ({ baseUrl }) => {
                     <Navbar.Collapse id="basic-navbar-nav" style={{ padding: '20px' }}>
                         <Nav className="me-auto">
                             <Nav.Link onClick={() => changeComp('completed')}>COMPLETED</Nav.Link>
-                            {/* <Nav.Link onClick={() => changeComp('wait')}>WAIT</Nav.Link> */}
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>

@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar';
 import { Form, Button } from 'react-bootstrap';
 import Footer from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export const Register = ({baseUrl}) => {
@@ -59,10 +60,27 @@ export const Register = ({baseUrl}) => {
             .then(response => response.json())
             .then(result => {
                 if(result.mess === 'Successfully'){
-                    alert('SingUp Successfully')
+                    toast.success('SingUp Successfully', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     navigate('/')
                 } else {
-                    alert('Already Use Account')
+                    
+                    toast.error('Already Use Account', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -118,6 +136,7 @@ export const Register = ({baseUrl}) => {
                 </Form>
             </div>
             <Footer />
+            <ToastContainer/>
         </>
     )
 }

@@ -4,6 +4,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer';
+import { ToastContainer, toast } from 'react-toastify';
 // import ModalWin from '../components/ModalEditAdd';
 
 const AddBankCard = ({ baseUrl }) => {
@@ -40,7 +41,6 @@ const AddBankCard = ({ baseUrl }) => {
         fetch(baseUrl + "showBankDetails", requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log(result);
                 setUserBankDetails(result.data)
             }
             )
@@ -80,11 +80,27 @@ const AddBankCard = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Add Successfully')
+                    toast.success('Add Successfully', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     showBankDetails();
 
                 } else {
-                    alert('Not Add')
+                    toast.error('Not Add', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -109,10 +125,26 @@ const AddBankCard = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('remove')
+                    toast.success('Remove', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     showBankDetails();
                 } else {
-                    alert('not remove')
+                    toast.error('Not Remove', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -154,12 +186,28 @@ const AddBankCard = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('edit')
+                    toast.success('Edit Successfully', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     document.getElementById('bankDiv').style.display = 'block'
                     document.getElementById('editDiv').style.display = 'none'
                     showBankDetails();
                 } else {
-                    alert('not edit')
+                    toast.error('Not Edit', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -364,6 +412,7 @@ const AddBankCard = ({ baseUrl }) => {
                 userId={localStorage.getItem('token')}
             /> */}
             <Footer />
+            <ToastContainer />
         </>
     )
 }

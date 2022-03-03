@@ -4,6 +4,7 @@ import { Navbar } from 'react-bootstrap';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import {Link} from 'react-router-dom'
 import Footer from '../components/Footer';
+import { ToastContainer, toast } from 'react-toastify';
 
  const ResetPassword = ({baseUrl}) => {
 
@@ -43,10 +44,29 @@ import Footer from '../components/Footer';
             .then(result => {
                 if (result.mess === 'Successfully') {
                     alert('Successfully Reset Password')
+                    toast.success('Successfully Reset Password', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     setResetPassUser({
                          userMobile:'', userPassword:''
                     }) 
                    
+                } else {
+                    toast.error('Not Reset Password', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -97,6 +117,7 @@ import Footer from '../components/Footer';
             </div>
 
             <Footer/>
+            <ToastContainer/>
         </>
     )
 }
