@@ -4,7 +4,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import {Link} from 'react-router-dom'
 import Footer from '../components/Footer';
 
-const Terms = () => {
+const Terms = ({baseUrl}) => {
     const [TermsCondition, setTerms] = useState([])
 
 
@@ -14,7 +14,7 @@ const Terms = () => {
       },[])
     
       const showTerms = async () => {
-        const ress = await fetch('http://localhost:5000/show/terms')
+        const ress = await fetch(baseUrl+'show/terms')
         const terms = await ress.json();
         setTerms(terms)
       }

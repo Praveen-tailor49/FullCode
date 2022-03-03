@@ -3,6 +3,7 @@ import { Navbar, Form, Button, Card, Container, Row, Col } from 'react-bootstrap
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer';
+import { ToastContainer, toast } from 'react-toastify';
 import { AiOutlinePlus } from 'react-icons/ai';
 
 
@@ -77,10 +78,26 @@ const AddAddress = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Add Successfully')
+                    toast.success('Add Successfully', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     showAddressDetails();
                 } else {
-                    alert('Not Add')
+                    toast.error('Not Add', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -105,10 +122,26 @@ const AddAddress = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('remove')
+                    toast.success('remove', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     showAddressDetails();
                 } else {
-                    alert('not remove')
+                    toast.error('Not remove', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -148,12 +181,28 @@ const AddAddress = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('edit')
+                    toast.success('Successfully Edit', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     document.getElementById('addUserDiv').style.display = 'block'
                     document.getElementById('editDiv').style.display = 'none'
                     showAddressDetails();
                 } else {
-                    alert('not edit')
+                    toast.error('Not Edit', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -320,6 +369,7 @@ const AddAddress = ({ baseUrl }) => {
                 </Container>
             </div>
             <Footer />
+            <ToastContainer />
         </>
     )
 }

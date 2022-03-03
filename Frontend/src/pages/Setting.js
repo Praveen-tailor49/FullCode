@@ -13,12 +13,7 @@ function Setting() {
                     <Navbar.Brand >Setting</Navbar.Brand>
                 </Navbar>
             </div>
-         
-            {/* <Card style={{ width: '18rem', backgroundColor:"gray",height:"20rem",margin:"auto" }}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-               <Button style={{ marginTop:"30px"}} onClick={event =>  window.location.href='https://api.whatsapp.com/send?phone=917239893438'}>Whatsapp</Button>
-               
-            </Card> */}
+            
             <div style={{ display: "flex", justifyContent: "center", marginTop: "5rem" }}>
             
                 <Card style={{ width: "50rem", height: "30rem", boxShadow: "5px 5px 5px gray" }} >

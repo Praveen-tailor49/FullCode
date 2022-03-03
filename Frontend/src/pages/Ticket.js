@@ -1,38 +1,38 @@
 import React, { useState } from 'react'
-import { Navbar, Form, Button, Card, Row, Col,Modal } from 'react-bootstrap';
+import { Navbar, Form, Button, Card, Row, Col, Modal } from 'react-bootstrap';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { Link } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
 import '../App.css'
 
 function MyVerticallyCenteredModal(props) {
     return (
-      <Modal
-        {...props}
-        size="sm"
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="contained-modal-title-vcenter">
-           THANK YOU
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          
-        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
-                                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
-                                </svg>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button onClick={props.onHide}>Close</Button>
-        </Modal.Footer>
-      </Modal>
+        <Modal
+            {...props}
+            size="sm"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    THANK YOU
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={props.onHide}>Close</Button>
+            </Modal.Footer>
+        </Modal>
     );
-  }
+}
 
 
-const Ticket = ({baseUrl}) => {
+const Ticket = ({ baseUrl }) => {
     const [modalShow, setModalShow] = React.useState(false);
 
     const [userTicketInfo, setUserTicketInfo] = useState({
@@ -70,14 +70,34 @@ const Ticket = ({baseUrl}) => {
         fetch(baseUrl + "user/tickets", requestOptions)
             .then(response => response.json())
             .then(result => {
-                if(result === 'Successfully'){
-                    alert('Successfully send')
+                if (result === 'Successfully') {
+                    toast.success('Successfully send', {
+                                position: "top-right",
+                                autoClose: 2000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                });
+                    setModalShow(true)
+                    setUserTicketInfo({
+                        name: '', email: '', phone: '', subject: '', message: '', status: 'Pending'
+                    })
                 }
-                else{
-                    alert('Not send')
+                else {
+                    toast.error('Not send', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             }
-        )
+            )
             .catch(error => console.log('error', error));
     }
 
@@ -121,20 +141,20 @@ const Ticket = ({baseUrl}) => {
 
                     </Row>
                     <div style={{ padding: '30px', margin: "auto" }}>
-
-                        {/* <Button variant="primary" style={{ width: '13rem' }} onClick={(e) => sendTicket(e)} > */}
-                        <Button variant="primary" style={{ width: '13rem' }} onClick={() => setModalShow(true)} >
+                        <Button variant="primary" style={{ width: '13rem' }} onClick={(e) =>sendTicket(e) } >
                             Continue
                         </Button>
                         <MyVerticallyCenteredModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      />
+                            show={modalShow}
+                            onHide={() => setModalShow(false)}
+                        />
                     </div>
 
                 </Card>
 
             </div>
+
+             <ToastContainer />
 
         </>
     )

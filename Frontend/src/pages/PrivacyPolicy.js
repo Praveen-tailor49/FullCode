@@ -4,17 +4,18 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import {Link} from 'react-router-dom'
 import Footer from '../components/Footer';
 
-const PrivacyPolicy = () => {
+const PrivacyPolicy = ({baseUrl}) => {
     const [PrivacyPolicy, setPrivacy] = useState([])
 
 
     useEffect(() => {
+        
         showPrivacy();
     
       },[])
     
       const showPrivacy = async () => {
-        const ress = await fetch('http://localhost:5000/show/privacy')
+        const ress = await fetch(baseUrl+'show/privacy')
         const privacy = await ress.json();
         setPrivacy(privacy)
       }

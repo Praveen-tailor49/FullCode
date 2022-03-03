@@ -7,19 +7,7 @@ import Footer from '../components/Footer';
 
 const Payment = ({ baseUrl }) => {
 
-    // const [userPaymentInfo, setUserPaymentInfo] = useState({
-    //     userId: localStorage.getItem('token'), paymentHeading: '', paymentContent: '', paymentImage: '', status: '1', dateTime: new Date()
-    // })
     const [userPaymentInfo, setUserPaymentInfo] = useState([])
-
-    // const HandlShow = (e) => {
-    //     const { name, value } = e.target
-
-    //     setUserPaymentInfo((prastate) => ({
-    //         ...prastate,
-    //         [name]: value,
-    //     }))
-    // }
 
     useEffect(() => {
         paymentShow()
@@ -39,7 +27,6 @@ const Payment = ({ baseUrl }) => {
         fetch(baseUrl + "show/admin/Payment", requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log(result);
                 setUserPaymentInfo(result)
             })
             .catch(error => console.log('error', error));
