@@ -32,7 +32,7 @@ import Order from './adminPages/Order';
 import GameResult from './adminPages/GameResult';
 import GameRules from './adminPages/GameRules';
 import Payments from './adminPages/Payment';
-import GameTC from './adminPages/GameTC';
+// import GameTC from './adminPages/GameTC';
 import Promotions from './adminPages/Promotions';
 import Wallet from './adminPages/Wallet'
 import Tickets from './adminPages/Tickets'
@@ -123,7 +123,7 @@ function App() {
           <Route path='/GameResult' element={<AuthAdmin cmp={GameResult} baseUrl={baseUrl}/>}/>
           <Route path='/GameRules' element={<AuthAdmin cmp={GameRules} baseUrl={baseUrl}/>}/>
           <Route path='/payments' element={<AuthAdmin cmp={Payments} baseUrl={baseUrl}/>}/>
-          <Route path='/GameTC' element={<AuthAdmin cmp={GameTC} baseUrl={baseUrl}/>}/>
+          {/* <Route path='/GameTC' element={<AuthAdmin cmp={GameTC} baseUrl={baseUrl}/>}/> */}
           <Route path='/user/wallet' element={<AuthAdmin cmp={Wallet}  baseUrl={baseUrl}/>}/>
           <Route path='/admin/ticket' element={<AuthAdmin cmp={Tickets}  baseUrl={baseUrl}/>}/>
           <Route path='/admin/gamesettings' element={<AuthAdmin cmp={Gamesetting}  baseUrl={baseUrl}/>}/>

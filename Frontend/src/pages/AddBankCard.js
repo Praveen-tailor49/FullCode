@@ -106,12 +106,13 @@ const AddBankCard = ({ baseUrl }) => {
             .catch(error => console.log('error', error));
     }
 
-    const removeBankCard = () => {
+    const removeBankCard = (val) => {
+        console.log(val.id);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "userId": localStorage.getItem('token')
+            "userId": val.id
         });
 
         var requestOptions = {
@@ -267,7 +268,7 @@ const AddBankCard = ({ baseUrl }) => {
                                                     <Button variant="primary" onClick={() => editBankCard(val)}>Edit</Button>
                                                 </div>
                                                 <div>
-                                                    <Button variant="danger" onClick={() => removeBankCard()}>Remove</Button>
+                                                    <Button variant="danger" onClick={() => removeBankCard(val)}>Remove</Button>
                                                 </div>
                                             </div>
                                         </Card.Body>

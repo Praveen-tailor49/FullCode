@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import AdminBackNav from '../adminComponent/AdminBackNav';
 import { Form, Button, Row, Col, Container } from 'react-bootstrap';
-import RichTextEditor from 'react-rte';
-import Myeditor from './Myeditor'
-const Pages = () => {
+import { ToastContainer, toast } from 'react-toastify';
+
+const Pages = ({ baseUrl }) => {
 
    
     const [privacyC , setPrivacy] = useState({
@@ -37,7 +37,7 @@ const Pages = () => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/show/about", requestOptions)
+        fetch(baseUrl+"show/about", requestOptions)
             .then(response => response.json())
             .then(result => {
                 setAbout(
@@ -67,14 +67,30 @@ const Pages = () => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/update/about/page", requestOptions)
+        fetch(baseUrl+"update/about/page", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Successfully Add')
+                    toast.success('Successfully Add', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
                 else {
-                    alert('err')
+                    toast.error('Not Add', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -100,7 +116,7 @@ const Pages = () => {
                 redirect: 'follow'
             };
     
-            fetch("http://localhost:5000/show/privacy", requestOptions)
+            fetch(baseUrl+"show/privacy", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     setPrivacy(
@@ -130,14 +146,30 @@ const Pages = () => {
                 redirect: 'follow'
             };
     
-            fetch("http://localhost:5000/update/privacy/page", requestOptions)
+            fetch(baseUrl+"update/privacy/page", requestOptions)
                 .then(response => response.json())
                 .then(result => {
                     if (result.mess === 'Successfully') {
-                        alert('Successfully Add')
+                        toast.success('Successfully Add', {
+                            position: "top-right",
+                            autoClose: 2000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            });
                     }
                     else {
-                        alert('err')
+                        toast.error('Not Add', {
+                            position: "top-right",
+                            autoClose: 2000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            });
                     }
                 })
                 .catch(error => console.log('error', error));
@@ -164,7 +196,7 @@ const Pages = () => {
                     redirect: 'follow'
                 };
         
-                fetch("http://localhost:5000/show/role", requestOptions)
+                fetch(baseUrl+"show/role", requestOptions)
                     .then(response => response.json())
                     .then(result => {
                         setRole(
@@ -194,14 +226,30 @@ const Pages = () => {
                     redirect: 'follow'
                 };
         
-                fetch("http://localhost:5000/update/role/page", requestOptions)
+                fetch(baseUrl+"update/role/page", requestOptions)
                     .then(response => response.json())
                     .then(result => {
                         if (result.mess === 'Successfully') {
-                            alert('Successfully Add')
+                            toast.success('Successfully Add', {
+                                position: "top-right",
+                                autoClose: 2000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                });
                         }
                         else {
-                            alert('err')
+                            toast.success('Not Add', {
+                                position: "top-right",
+                                autoClose: 2000,
+                                hideProgressBar: false,
+                                closeOnClick: true,
+                                pauseOnHover: true,
+                                draggable: true,
+                                progress: undefined,
+                                });
                         }
                     })
                     .catch(error => console.log('error', error));
@@ -228,7 +276,7 @@ const Pages = () => {
                         redirect: 'follow'
                     };
             
-                    fetch("http://localhost:5000/show/terms", requestOptions)
+                    fetch(baseUrl+"show/terms", requestOptions)
                         .then(response => response.json())
                         .then(result => {
                             setTerms(
@@ -258,14 +306,30 @@ const Pages = () => {
                         redirect: 'follow'
                     };
             
-                    fetch("http://localhost:5000/update/terms/page", requestOptions)
+                    fetch(baseUrl+"update/terms/page", requestOptions)
                         .then(response => response.json())
                         .then(result => {
                             if (result.mess === 'Successfully') {
-                                alert('Successfully Add')
+                                toast.success('Successfully Add', {
+                                    position: "top-right",
+                                    autoClose: 2000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    });
                             }
                             else {
-                                alert('err')
+                                toast.error('Not Add', {
+                                    position: "top-right",
+                                    autoClose: 2000,
+                                    hideProgressBar: false,
+                                    closeOnClick: true,
+                                    pauseOnHover: true,
+                                    draggable: true,
+                                    progress: undefined,
+                                    });
                             }
                         })
                         .catch(error => console.log('error', error));
@@ -419,6 +483,8 @@ const Pages = () => {
                     </Row>
                 </Container>
             </div>
+
+            <ToastContainer/>
         </>
     )
 }

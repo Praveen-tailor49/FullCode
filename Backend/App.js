@@ -189,7 +189,7 @@ app.post('/remove/BankDetails', (req, res) => {
     const {userId} = req.body
 
     db.query(
-        `UPDATE  bankdetails SET userDelete='0' WHERE userId='${userId}'`,
+        `UPDATE  bankdetails SET userDelete='0' WHERE id='${userId}'`,
         (err, result) => {
             if(result) {
                 res.status(200).json({mess:'Successfully'});
@@ -697,9 +697,9 @@ app.post('/edit/admin/paymentDetails', (req, res) => {
 
 app.post('/user/tickets', (req, res) => {
 
-    const { userId, name, email, phone, subject, message, status } = req.body;
+    const { userId, name, email, phoneNo, subject, message, status } = req.body;
     db.query(`INSERT INTO tickets (userId, name, email, phone, subject, message, status) VALUES (?,?,?,?,?,?,?)`,
-        [userId, name, email, phone, subject, message, status],
+        [userId, name, email, phoneNo, subject, message, status],
         (err, result) => {
             if (err) {
                 res.status(400).json(err);
