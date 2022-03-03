@@ -31,6 +31,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 const WinHeader = () => {
+    const refreshPage = ()=>{
+        window.location.reload();
+     }
     // const [buttonColor1, setButtonColor1] = useState()
     // const [modalShow, setModalShow] = useState(false);
     const [modalShow1, setModalShow1] = useState(false);
@@ -138,7 +141,7 @@ const WinHeader = () => {
                     </div>
 
                     <div style={{ marginLeft: '20px' }}>
-                        <Button variant="dark" onClick={() => setModalShow1(true)}>Reload<BiRefresh /></Button>
+                        <Button variant="dark" onClick={refreshPage}>Reload<BiRefresh /></Button>
                     </div>
                 </div>
             </div>
