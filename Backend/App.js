@@ -478,10 +478,29 @@ app.post('/remove/promotion', (req, res) => {
     )
 })
 
+
+app.post('/settings', (req, res) => {
+
+    const { callNumber, wpNumber, name, email, upiId } = req.body;
+    db.query(`INSERT INTO settings (callNumber, wpNumber, name, email, upiId) VALUES (?,?,?,?,?)`,
+        [callNumber, wpNumber, name, email, upiId],
+        (err, result) => {
+            if (err) {
+                res.status(400).json(err);
+            }
+            else {
+                res.status(200).json('Successfully');
+            }
+        }
+    )
+})
+
+
+
 app.post('/orders', (req, res) => {
 
     const { userId, userName, time, Period, cardtype, amount } = req.body;
-    db.query(`INSERT INTO orders (userId, userName, time, Period, cardtype, amount) VALUES (?,?,?,?)`,
+    db.query(`INSERT INTO orders (userId, userName, time, Period, cardtype, amount) VALUES (?,?,?,?,?,?)`,
         [userId, userName, time, Period, cardtype, amount],
         (err, result) => {
             if (err) {
@@ -502,6 +521,23 @@ app.post('/showOrder', (req, res) => {
         }
     )
 })
+
+app.post('/remove/admin/order', (req, res) => {
+    const {Id} = req.body
+    db.query(
+        `DELETE FROM  orders WHERE Id='${Id}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
+
 
 app.post('/result', (req, res) => {
 
@@ -567,6 +603,23 @@ app.get('/showRules', (req, res) => {
         `SELECT * FROM rules`,
         (err, result) => {
             return res.json(result);
+        }
+    )
+})
+
+app.post('/update/rule/page', (req, res) => {
+
+    const {rules,Id} = req.body
+
+    db.query(
+        `UPDATE  rules SET rules='${rules }' WHERE Id ='${Id}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
         }
     )
 })

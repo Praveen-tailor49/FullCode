@@ -38,12 +38,40 @@ const WinHeader = ({userBalance}) => {
     const [valueRupess, setValueRupess] = useState('10');
     const [cardValue, setCardValue] = useState('');
 
+    const checkoutOrder = (val) => {
+        showModal2(val)
+        console.log(val);
+        var myHeaders = new Headers()
+        myHeaders.append("Content-Type", "application/json");
+  
+        var raw = JSON.stringify({ "userId": localStorage.getItem("token"), "userName": "surbhi", "time":2.15, "cardtype": cardValue, "amount": valueRupess ,"Period": 20220210208});
+  
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+  
+        fetch("http://localhost:5000/orders", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                if (result === 'Successfully') {
+                    
+                    alert('Successfully Add ')
+                    
+                } else {
+                    alert('Login Required')
+                }
+            })
+            .catch(error => console.log('error', error));
+    }
+
     useEffect(() => {
         document.getElementById("img10").style.boxShadow = "0px 0px 30px 2px green"
     }, [])
 
     const showModal2 = (val) => {
-
         setCardValue(val)
         setModalShow2(true)
 
@@ -167,7 +195,7 @@ const WinHeader = ({userBalance}) => {
 
                     <div style={{ marginLeft: '55px' }}>
                         <h4>Count Down</h4>
-                        <h4>02:49</h4>
+                        <h4 >02:49</h4>
                     </div>
                 </div>
 
@@ -176,7 +204,7 @@ const WinHeader = ({userBalance}) => {
 
 
 
-                    <CardDiv id="tie" onClick={() => showModal2('tie')} style={{
+                    <CardDiv id="tie" onClick={() => checkoutOrder('tie')} style={{
                         width: '58rem',  backgroundColor: "green", borderRadius: "25px",
                         border: "5px solid #e4d00a", marginBottom: "5px"
                     }}><div className='main1' style={{ height: "1.5rem", borderRadius: "25px 26px 0px 0px", backgroundColor: "darkgreen", display: "flex", justifyContent: "space-between" }} >
@@ -188,21 +216,21 @@ const WinHeader = ({userBalance}) => {
 
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                    <CardDiv id="andar" onClick={() => showModal2('andar')} style={{
+                    <CardDiv id="andar" onClick={() => checkoutOrder('andar')} style={{
                         width: '29rem',  borderRadius: "25px 25px 25px 180px", backgroundColor: "blue",
                         border: "5px solid #e4d00a", marginRight: "4px", marginBottom: "10px"
                     }}><div style={{ height: "1.5rem", borderRadius: "10px 10px 5px 4px", backgroundColor: "darkblue", display: "flex", justifyContent: "space-between" }}>
                             <div style={{ display: 'flex' }}>
 
-
+                        
                                 {/* <div style={{ color: "white", marginRight: "8px" }}>Can bet:415710624</div> */}
                             </div>
-                        </div>
+</div>
                         <FontSize >Andar</FontSize>
                         <Card.Img variant="top" src="" />
 
                     </CardDiv>
-                    <CardDiv id="bahar" onClick={() => showModal2('bahar')} style={{
+                    <CardDiv id="bahar" onClick={() => checkoutOrder('bahar')} style={{
                         width: '29rem',  borderRadius: "25px 25px 180px 25px",
                         backgroundColor: "red",
                         border: "5px solid #e4d00a"

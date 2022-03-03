@@ -173,7 +173,7 @@ const TableCom = ({baseUrl}) => {
             redirect: 'follow'
         };
 
-        fetch(baseUrl+"remove/UserDetails", requestOptions)
+        fetch("http://localhost:5000/remove/UserDetails", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
