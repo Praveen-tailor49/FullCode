@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Login.css'
 import {  useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
@@ -9,6 +9,13 @@ const LoginAdmin = () => {
 
     const [adminUser, setAdminUser] = useState({
         email:'', password:''
+    })
+
+    useEffect(()=>{
+
+        if(localStorage.getItem('adtoken')){
+            navigate('/admin')
+        }
     })
 
     const handlShow = (e) =>{

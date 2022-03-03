@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import AdminBackNav from '../adminComponent/AdminBackNav';
 import styled from 'styled-components'
 // import TextField  from '@mui/material/TextField' ;
@@ -9,28 +9,78 @@ import {Container,Col,Row,Form,Button} from "react-bootstrap"
 import Myeditor from './Myeditor'
 
 function GameRules() {
-  const [rules, setrules] = useState("");
+  const [ruleC, setrules] = useState({
+    rules:'', Id:''
+  });
 
+useEffect(() => {
+  showRule()
+},[])
 
-  const sendRules = (e) => {
-    e.preventDefault()
+  const showRule = (e) => {
+
     var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Content-Type", "application/json");
 
-    var raw = JSON.stringify({ rules: rules});
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
 
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
+        fetch("http://localhost:5000/showRules", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+              console.log(result)
+              setrules(
+                    {
+                      rules: result[0].rules,
+                        Id: result[0].Id
 
-    fetch("http://localhost:5000/rules", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-  };
+                    }
+                )
+            })
+            .catch(error => console.log('error', error));
+        }
+    const updateRule = (e) => {
+
+        e.preventDefault()
+        const { rules, Id} = ruleC
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+          rules, Id
+        });
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:5000/update/rule/page", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+                if (result.mess === 'Successfully') {
+                    alert('Successfully Add')
+                }
+                else {
+                    alert('err')
+                }
+            })
+            .catch(error => console.log('error', error));
+    }
+
+    const handRule = (e) => {
+        const { name, value } = e.target
+
+        setrules((prastate) => ({
+            ...prastate,
+            [name]: value,
+        }));
+    }
 
   return (
     <>
@@ -55,7 +105,7 @@ function GameRules() {
                     <h5>Page Content</h5>
                     </Col>
                     <Col>
-                    <input onChange={(e) => setrules(e.target.value)}/>
+                    <textarea style={{width:"90%", height:"161px"}} onChange={(e) => handRule(e)} type="text" name='rules' value={ruleC.rules}/>
                     </Col>
                 </Row>
                
@@ -63,7 +113,7 @@ function GameRules() {
                 <Row style={{marginTop:"2rem",marginBottom:"3rem"}}>
                
                     <Col>
-                     <Button variant="outline-secondary" onClick={(e)=>sendRules(e)}>Submit</Button>{' '}
+                     <Button variant="outline-secondary" onClick={(e)=>updateRule(e)}>Submit</Button>{' '}
                     </Col>
                 </Row>
             

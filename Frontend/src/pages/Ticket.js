@@ -1,10 +1,39 @@
 import React, { useState } from 'react'
-import { Navbar, Form, Button, Card, Row, Col } from 'react-bootstrap';
+import { Navbar, Form, Button, Card, Row, Col,Modal } from 'react-bootstrap';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { Link } from 'react-router-dom'
+import '../App.css'
+
+function MyVerticallyCenteredModal(props) {
+    return (
+      <Modal
+        {...props}
+        size="sm"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title id="contained-modal-title-vcenter">
+           THANK YOU
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                    <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                    <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                                </svg>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button onClick={props.onHide}>Close</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
 
 
 const Ticket = ({baseUrl}) => {
+    const [modalShow, setModalShow] = React.useState(false);
 
     const [userTicketInfo, setUserTicketInfo] = useState({
         userId: localStorage.getItem('token'), name: '', email: '', phone: '', subject: '', message: '', status: 'Pending'
@@ -62,7 +91,7 @@ const Ticket = ({baseUrl}) => {
 
             <div style={{ display: "flex", justifyContent: "center", marginTop: "5rem" }}>
                 <Card style={{ width: "50rem", height: "30rem", boxShadow: "10px 10px 5px lightgray" }} >
-                    <h3 style={{ textAlign: "center", color: "gray", marginTop: "40px", textShadow: "2px 2px lightgray" }}>Tickets</h3>
+                    <h3 style={{ textAlign: "center", color: "gray", marginTop: "40px", textShadow: "2px 2px lightgray" }}>Ticket</h3>
                     <hr ></hr>
                     <Row style={{ margin: "auto" }}>
 
@@ -93,9 +122,14 @@ const Ticket = ({baseUrl}) => {
                     </Row>
                     <div style={{ padding: '30px', margin: "auto" }}>
 
-                        <Button variant="primary" style={{ width: '13rem' }} onClick={(e) => sendTicket(e)} >
-                            Submit
+                        {/* <Button variant="primary" style={{ width: '13rem' }} onClick={(e) => sendTicket(e)} > */}
+                        <Button variant="primary" style={{ width: '13rem' }} onClick={() => setModalShow(true)} >
+                            Continue
                         </Button>
+                        <MyVerticallyCenteredModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
                     </div>
 
                 </Card>
