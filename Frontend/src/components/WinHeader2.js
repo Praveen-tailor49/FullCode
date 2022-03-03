@@ -30,6 +30,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // let buttonColor1 = document.getElementsByClassName("button")
 
 
+    
 const WinHeader = ({userBalance}) => {
     // const [buttonColor1, setButtonColor1] = useState()
     // const [modalShow, setModalShow] = useState(false);
@@ -37,6 +38,10 @@ const WinHeader = ({userBalance}) => {
     const [modalShow2, setModalShow2] = useState(false);
     const [valueRupess, setValueRupess] = useState('10');
     const [cardValue, setCardValue] = useState('');
+
+    const refreshPage = ()=>{
+        window.location.reload();
+     }
 
     const checkoutOrder = (val) => {
         showModal2(val)
@@ -166,7 +171,7 @@ const WinHeader = ({userBalance}) => {
                     </div>
 
                     <div style={{ marginLeft: '20px' }}>
-                        <Button variant="dark" onClick={() => setModalShow1(true)}>Reload<BiRefresh /></Button>
+                        <Button variant="dark" onClick={refreshPage}>Reload<BiRefresh /></Button>
                     </div>
                 </div>
             </div>

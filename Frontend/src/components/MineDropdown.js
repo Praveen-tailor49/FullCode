@@ -121,7 +121,18 @@ function MineDropdown() {
                             <Link to='/user/ticket' style={{color:'black', textDecoration:'none'}}>Ticket</Link>
                             </Dropdown.Toggle>
                         </Dropdown>
+
+                        <div style={{ marginTop: '15px', marginBottom:'5rem' }}>
+                        <Dropdown>
+                            <Dropdown.Toggle style={{ width: '98vw', textAlign: 'inherit' }} id="dropdown-button-dark-example1" variant="light">
+                            <Link to='/setting' style={{color:'black', textDecoration:'none'}}>Settings</Link>
+                            </Dropdown.Toggle>
+                        </Dropdown>
                     </div>
+                    </div>
+                    
+                  
+                 
                 </div>
             </div>
     </>

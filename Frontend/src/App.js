@@ -39,8 +39,10 @@ import Tickets from './adminPages/Tickets'
 import Gamesetting from './adminPages/Gamesetting'
 import LoginAdmin from './adminPages/Login'
 import Ticket from './pages/Ticket';
+import Setting from './pages/Setting';
 import AuthAdmin from './AuthAdmin';
 // import AdminLogin from './adminPages/AdminLogin'
+
 
 function App() {
 
@@ -148,6 +150,7 @@ function App() {
           <Route path='/recharge' element={<AuthUser cmp={Recharge} userBalance={userBalance}/>}/>
           <Route path='/payment' element={<AuthUser cmp={Payment}  baseUrl={baseUrl}/>}/>
           <Route path='/user/ticket' element={<AuthUser  cmp={Ticket}  baseUrl={baseUrl}/>}/>
+          <Route path='/setting' element={<AuthUser  cmp={Setting}  baseUrl={baseUrl}/>}/>
       </Routes>
         
     </>
