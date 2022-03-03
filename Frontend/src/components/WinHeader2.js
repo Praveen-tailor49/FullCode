@@ -1,39 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { BiRupee, BiRefresh } from 'react-icons/bi';
 import { AiFillTrophy } from 'react-icons/ai';
-// import { HiOutlineCurrencyRupee } from 'react-icons/hi';
-
 import { Button, Container, Card, Row, Col } from 'react-bootstrap';
-// import ModalWin from './ModalWin';
 import ModalReadRule from './ModalReadRule';
 import { Link } from 'react-router-dom'
 import coin1 from '../image/coins-img/coin-1.png'
 import coin2 from '../image/coins-img/coin-2.png'
 import coin3 from '../image/coins-img/coin-3.png'
-// import coin4 from '../image/coins-img/coin-4.png'
-// import coin5 from '../image/coins-img/coin-5.png'
 import coin6 from '../image/coins-img/coin-6.png'
-// import coin7 from '../image/coins-img/coin-7.png'
-// import coin8 from '../image/coins-img/coin-8.png'
 import coin10 from '../image/coins-img/coin-10.png'
-// import custom from '../image/coins-img/coin-custom.png'
-// import card1 from '../image/cards/card-1.png'
-// import card2 from '../image/cards/card-2.png'
-// import card3 from '../image/cards/card-3.png'
 import ModalRupesSelect from './ModalRupesSelect';
 import styled from 'styled-components'
-// import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
-// let buttonColor1 = document.getElementsByClassName("button")
-
-
-
-const WinHeader = ({ userBalance }) => {
-    // const [buttonColor1, setButtonColor1] = useState()
-    // const [modalShow, setModalShow] = useState(false);
+const WinHeader = ({ baseUrl, userBalance }) => {
+    
     const [modalShow1, setModalShow1] = useState(false);
     const [modalShow2, setModalShow2] = useState(false);
     const [valueRupess, setValueRupess] = useState('10');
@@ -58,15 +40,31 @@ const WinHeader = ({ userBalance }) => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/orders", requestOptions)
+        fetch(baseUrl +"orders", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result === 'Successfully') {
-
-                    alert('Successfully Add ')
+                    toast.success('Successfully Add', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
 
                 } else {
                     alert('Login Required')
+                    toast.error('Login Required', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -257,11 +255,6 @@ const WinHeader = ({ userBalance }) => {
                 </Container>
             </CoinDiv>
 
-            {/* <ModalWin
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            /> */}
-
             <ModalReadRule
                 show={modalShow1}
                 onHide={() => setModalShow1(false)}
@@ -274,7 +267,7 @@ const WinHeader = ({ userBalance }) => {
                 cardValue={cardValue}
             />
 
-            {/* <ToastContainer /> */}
+            <ToastContainer />
         </>
     )
 }
@@ -331,14 +324,3 @@ padding: 1rem;
   }
 
 `
-
-{/* .design::before{
-    content: '';
-    "width": 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: #ffee10;
-    transition: .5s ;
-    transform: scale(.9);
-    z-index: -1;
-} */}

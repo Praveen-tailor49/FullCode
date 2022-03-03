@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import MaterialTable from "material-table";
-import { Container, Form, Col, Row, Button, Card } from 'react-bootstrap';
-import { IoMdAddCircle } from 'react-icons/io';
+import { Container, Form, Col, Row, Button } from 'react-bootstrap';
 import AdminBackNav from '../adminComponent/AdminBackNav';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Tickets = ({ baseUrl }) => {
 
@@ -43,18 +43,6 @@ const Tickets = ({ baseUrl }) => {
             .catch(error => console.log('error', error));
     }
 
-    const showRegister = (val) => {
-
-        if (val === 'add') {
-            document.querySelector("#divTable").style.display = "none";
-            document.querySelector("#show1").style.display = "block";
-        }
-
-        if (val === 'cancel') {
-            document.querySelector("#divTable").style.display = "block";
-            document.querySelector("#show1").style.display = "none";
-        }
-    };
 
     const removeUser = (id) => {
         var myHeaders = new Headers();
@@ -75,7 +63,15 @@ const Tickets = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Successfully Remove')
+                    toast.success('Successfully Remove', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     showTicket()
                 }
             })
@@ -122,7 +118,15 @@ const Tickets = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Successfully Add')
+                    toast.success('Successfully Add', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     document.getElementById('editDiv').style.display = 'none';
                     document.getElementById('divTable').style.display = 'block';
                     showTicket()
@@ -131,47 +135,11 @@ const Tickets = ({ baseUrl }) => {
             .catch(error => console.log('error', error));
     }
 
-    // const sendTicket = (e) => {
-
-    //     e.preventDefault()
-
-    //     const { ticketId, name, email, phone, subject, message, status } = ticketData
-    //     var myHeaders = new Headers();
-    //     myHeaders.append("Content-Type", "application/json");
-
-    //     var raw = JSON.stringify({
-    //         userId, name, email, phone, subject, message, status
-    //     });
-
-    //     var requestOptions = {
-    //         method: 'POST',
-    //         headers: myHeaders,
-    //         body: raw,
-    //         redirect: 'follow'
-    //     };
-
-    //     fetch(baseUrl + "user/tickets", requestOptions)
-    //         .then(response => response.json())
-    //         .then(result => {
-    //             if (result === 'Successfully') {
-    //                 alert('Successfully send')
-    //             }
-    //             else {
-    //                 alert('Not send')
-    //             }
-    //         }
-    //         )
-    //         .catch(error => console.log('error', error));
-    // }
-
     return (
         <>
             <AdminBackNav />
 
-            {/* <div style={{ marginLeft: "2rem", marginTop: "2rem", display: "flex", cursor: 'pointer' }}>
-                <IoMdAddCircle style={{ width: "2rem", height: "2rem" }} onClick={() => showRegister('add')} />
-                <span style={{ marginLeft: "0.7rem", fontSize: "1.5rem", fontWeight: "" }}>Add Ticket</span>
-            </div> */}
+    
             <div style={{ padding: '30px', display: 'block' }} id='divTable'>
                 <MaterialTable
                     title="User Tickets"
@@ -250,7 +218,7 @@ const Tickets = ({ baseUrl }) => {
                                 <Button variant="light" onClick={() => editTicket('cencel')}>Cencel</Button>
                             </Col>
                             <Col>
-                                <Button variant="primary" onClick={() => { editUserTicket() }}>Save</Button>
+                                <Button variant="primary" onClick={() =>  editUserTicket()}>Save</Button>
                             </Col>
                         </Row>
 
@@ -258,49 +226,7 @@ const Tickets = ({ baseUrl }) => {
                 </Container>
             </div>
 
-            {/* <div id='show1' style={{ display: "none" }} >
-                <div style={{ display: "flex", justifyContent: "center", marginTop: "5rem" }}>
-                    <Card style={{ width: "50rem", height: "30rem", boxShadow: "10px 10px 5px lightgray" }} >
-                        <h3 style={{ textAlign: "center", color: "gray", marginTop: "40px", textShadow: "2px 2px lightgray" }}>Contact</h3>
-                        <hr ></hr>
-                        <Row style={{ margin: "auto" }}>
-
-                            <Form>
-                                <Row style={{ marginBottom: "5px" }}>
-                                    <Col style={{ borderRadius: "8px" }}>
-                                        <Form.Control placeholder="Name" name='name' value={ticketData.name} onChange={handShow} required />
-                                    </Col>
-                                    <Col>
-                                        <Form.Control placeholder="Email" name='email' value={ticketData.email} onChange={handShow} required />
-                                    </Col>
-                                </Row>
-                                <Row style={{ marginBottom: "5px" }}>
-                                    <Col>
-                                        <Form.Control placeholder="Phone" name='phone' value={ticketData.phone} onChange={handShow} required />
-                                    </Col>
-                                    <Col>
-                                        <Form.Control placeholder="Subject" name='subject' value={ticketData.subject} onChange={handShow} required />
-                                    </Col>
-                                </Row>
-                            </Form>
-                            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                <Form.Label>MESSAGE</Form.Label>
-                                <Form.Control as="textarea" rows={3} name='message' value={ticketData.message} onChange={handShow} required />
-                            </Form.Group>
-
-                        </Row>
-                        <div style={{ padding: '30px', margin: "auto" }}>
-
-                            <Button variant="primary" style={{ width: '13rem' }} onClick={(e) => sendTicket(e)} >
-                                Continue
-                            </Button>
-                        </div>
-
-                    </Card>
-
-                </div>
-            </div> */}
-
+            <ToastContainer/>
         </>
     )
 }

@@ -36,7 +36,7 @@ const Ticket = ({ baseUrl }) => {
     const [modalShow, setModalShow] = React.useState(false);
 
     const [userTicketInfo, setUserTicketInfo] = useState({
-        userId: localStorage.getItem('token'), name: '', email: '', phone: '', subject: '', message: '', status: 'Pending'
+        userId: localStorage.getItem('token'), name: '', email: '', phoneNo: '', subject: '', message: '', status: 'Pending'
     })
 
     const HandlShow = (e) => {
@@ -52,12 +52,12 @@ const Ticket = ({ baseUrl }) => {
 
         e.preventDefault()
 
-        const { userId, name, email, phone, subject, message, status } = userTicketInfo
+        const { userId, name, email, phoneNo, subject, message, status } = userTicketInfo
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            userId, name, email, phone, subject, message, status
+            userId, name, email, phoneNo, subject, message, status
         });
 
         var requestOptions = {
@@ -82,7 +82,7 @@ const Ticket = ({ baseUrl }) => {
                                 });
                     setModalShow(true)
                     setUserTicketInfo({
-                        name: '', email: '', phone: '', subject: '', message: '', status: 'Pending'
+                        userId: localStorage.getItem('token'), name: '', email: '', phoneNo: '', subject: '', message: '', status: 'Pending'
                     })
                 }
                 else {
@@ -126,7 +126,7 @@ const Ticket = ({ baseUrl }) => {
                             </Row>
                             <Row style={{ marginBottom: "5px" }}>
                                 <Col>
-                                    <Form.Control placeholder="Phone" name='phone' value={userTicketInfo.phone} onChange={HandlShow} required />
+                                    <Form.Control placeholder="PhoneNo" name='phoneNo' value={userTicketInfo.phoneNo} onChange={HandlShow} required />
                                 </Col>
                                 <Col>
                                     <Form.Control placeholder="Subject" name='subject' value={userTicketInfo.subject} onChange={HandlShow} required />

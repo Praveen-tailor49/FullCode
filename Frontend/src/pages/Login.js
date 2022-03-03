@@ -68,7 +68,7 @@ export const Login = ({baseUrl}) => {
                     localStorage.setItem('token', result.data[0].userId)
                     navigate('/win')
                 } else {
-                    toast.success('Mobile number and Password is wrong', {
+                    toast.error('Mobile number and Password is wrong', {
                         position: "top-right",
                         autoClose: 2000,
                         hideProgressBar: false,

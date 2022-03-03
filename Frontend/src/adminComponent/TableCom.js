@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Container, Form, Col, Row, Button, Card } from 'react-bootstrap';
 import { IoMdAddCircle } from 'react-icons/io';
 import MaterialTable from "material-table";
-import styled from 'styled-components'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 const TableCom = ({baseUrl}) => {
     console.log(baseUrl);
@@ -88,7 +89,15 @@ const TableCom = ({baseUrl}) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Successfully Add')
+                    toast.success('Successfully Add', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     document.getElementById('editDiv').style.display = 'none';
                     document.getElementById('divTable').style.display = 'block';
                     showUser()
@@ -136,7 +145,15 @@ const TableCom = ({baseUrl}) => {
             .then((response) => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Successfully Add')
+                    toast.success('Successfully Add', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     document.querySelector("#divTable").style.display = "block";
                     document.querySelector("#show1").style.display = "none";
                     showUser()
@@ -178,6 +195,15 @@ const TableCom = ({baseUrl}) => {
             .then(result => {
                 if (result.mess === 'Successfully') {
                     alert('Successfully Remove')
+                    toast.success('Successfully Remove', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     showUser()
                 }
             })
@@ -468,6 +494,7 @@ const TableCom = ({baseUrl}) => {
                 </div>
             </div>
 
+            <ToastContainer/>
 
         </>
     )
@@ -475,6 +502,6 @@ const TableCom = ({baseUrl}) => {
 
 export default TableCom
 
-const P = styled.p`
-    font-size:'12px';
-`;
+// const P = styled.p`
+//     font-size:'12px';
+// `;

@@ -11,10 +11,8 @@ const ModalReadRule = (props) => {
     },[])
   
     const showRules = async () => {
-      const ress = await fetch('http://localhost:5000/showRules')
+      const ress = await fetch(props.baseUrl+'showRules')
       const gameRules = await ress.json();
-      console.log(gameRules);
-      console.log('dgh');
       setRules(gameRules)
     }
     return (
