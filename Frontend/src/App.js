@@ -37,6 +37,8 @@ import Promotions from './adminPages/Promotions';
 import Wallet from './adminPages/Wallet'
 import Tickets from './adminPages/Tickets'
 import Gamesetting from './adminPages/Gamesetting'
+import Setting from './adminPages/Setting'
+
 import LoginAdmin from './adminPages/Login'
 import Ticket from './pages/Ticket';
 import AuthAdmin from './AuthAdmin';
@@ -125,7 +127,8 @@ function App() {
           <Route path='/user/wallet' element={<AuthAdmin cmp={Wallet}  baseUrl={baseUrl}/>}/>
           <Route path='/admin/ticket' element={<AuthAdmin cmp={Tickets}  baseUrl={baseUrl}/>}/>
           <Route path='/admin/gamesettings' element={<AuthAdmin cmp={Gamesetting}  baseUrl={baseUrl}/>}/>
-          
+          <Route path='/admin/Setting' element={<AuthAdmin cmp={Setting}  baseUrl={baseUrl}/>}/>
+
 
 
 

@@ -495,6 +495,48 @@ app.post('/settings', (req, res) => {
     )
 })
 
+app.post('/show/admin/setting', (req, res) => {
+    db.query(
+        `SELECT * FROM settings`,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
+
+
+
+app.post('/edit/settings', (req, res) => {
+    const { settingId,callNumber, wpNumber, name, email, upiId} = req.body
+    db.query(
+        `UPDATE settings SET callNumber='${callNumber}', wpNumber='${wpNumber}', name='${name}', email='${email}' , upiId='${upiId}' WHERE Id='${settingId}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
+app.post('/remove/settings', (req, res) => {
+    const {settingsId} = req.body
+    db.query(
+        `DELETE FROM  settings WHERE Id='${settingsId}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
 
 
 app.post('/orders', (req, res) => {
@@ -875,5 +917,7 @@ app.post('/adminLogin', (req, res) => {
         res.send('user not found')
     )
 })
+
+
 
 app.listen(5000, () => console.log('server is run on 5000'))
