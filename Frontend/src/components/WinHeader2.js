@@ -30,7 +30,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // let buttonColor1 = document.getElementsByClassName("button")
 
 
-const WinHeader = () => {
+const WinHeader = ({userBalance}) => {
     // const [buttonColor1, setButtonColor1] = useState()
     // const [modalShow, setModalShow] = useState(false);
     const [modalShow1, setModalShow1] = useState(false);
@@ -154,7 +154,7 @@ const WinHeader = () => {
             </div>
             <div style={{ backgroundColor: '#6495ED', color: 'white', marginTop: '-16px' }}>
                 <div>
-                    <h6 style={{ padding: '20px' }}>Available balance: 0.00 <BiRupee /></h6>
+                    <h6 style={{ padding: '20px' }}>Available balance: {userBalance} <BiRupee /></h6>
                 </div>
 
                 <div style={{ display: 'flex', padding: '10px', justifyContent: 'center' }}>

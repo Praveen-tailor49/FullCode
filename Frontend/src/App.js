@@ -39,6 +39,7 @@ import Tickets from './adminPages/Tickets'
 import Gamesetting from './adminPages/Gamesetting'
 import LoginAdmin from './adminPages/Login'
 import Ticket from './pages/Ticket';
+import AuthAdmin from './AuthAdmin';
 // import AdminLogin from './adminPages/AdminLogin'
 
 function App() {
@@ -97,7 +98,7 @@ function App() {
 
 
           {/* Admin pages */}
-          <Route path='/admin/login' element={<LoginAdmin baseUrl={baseUrl}/>}/>
+          {/* <Route path='/admin/login' element={<LoginAdmin baseUrl={baseUrl}/>}/>
           <Route path='/admin' element={<AdminPage baseUrl={baseUrl}/>}/>
           <Route path='/user/management' element={<UserManagement baseUrl={baseUrl} />}/>
           <Route path='/user/pages' element={<Pages baseUrl={baseUrl}/>}/>
@@ -109,14 +110,28 @@ function App() {
           <Route path='/GameTC' element={<GameTC baseUrl={baseUrl}/>}/>
           <Route path='/user/wallet' element={<Wallet  baseUrl={baseUrl}/>}/>
           <Route path='/admin/ticket' element={<Tickets  baseUrl={baseUrl}/>}/>
-          <Route path='/admin/gamesettings' element={<Gamesetting  baseUrl={baseUrl}/>}/>
+          <Route path='/admin/gamesettings' element={<Gamesetting  baseUrl={baseUrl}/>}/> */}
+
+          <Route path='/admin/login' element={<AuthAdmin cmp={LoginAdmin} baseUrl={baseUrl}/>}/>
+          <Route path='/admin' element={<AuthAdmin cmp={AdminPage} baseUrl={baseUrl}/>}/>
+          <Route path='/user/management' element={<AuthAdmin cmp={UserManagement} baseUrl={baseUrl} />}/>
+          <Route path='/user/pages' element={<AuthAdmin cmp={Pages} baseUrl={baseUrl}/>}/>
+          <Route path='/Promotions' element={<AuthAdmin cmp={Promotions} baseUrl={baseUrl}/>}/>
+          <Route path='/Order' element={<AuthAdmin cmp={Order} baseUrl={baseUrl}/>}/>
+          <Route path='/GameResult' element={<AuthAdmin cmp={GameResult} baseUrl={baseUrl}/>}/>
+          <Route path='/GameRules' element={<AuthAdmin cmp={GameRules} baseUrl={baseUrl}/>}/>
+          <Route path='/payments' element={<AuthAdmin cmp={Payments} baseUrl={baseUrl}/>}/>
+          <Route path='/GameTC' element={<AuthAdmin cmp={GameTC} baseUrl={baseUrl}/>}/>
+          <Route path='/user/wallet' element={<AuthAdmin cmp={Wallet}  baseUrl={baseUrl}/>}/>
+          <Route path='/admin/ticket' element={<AuthAdmin cmp={Tickets}  baseUrl={baseUrl}/>}/>
+          <Route path='/admin/gamesettings' element={<AuthAdmin cmp={Gamesetting}  baseUrl={baseUrl}/>}/>
           
 
 
 
           {/* User Auth */}
 
-          <Route path='/win' element={<AuthUser cmp={Win} />}/>
+          <Route path='/win' element={<AuthUser cmp={Win} userBalance={userBalance} />}/>
           <Route path='/mine' element={<AuthUser cmp={MinePage} baseUrl={baseUrl} userData={userData}/>}/>
           <Route path='/privacy/policy' element={<AuthUser cmp={PrivacyPolicy}/>}/>
           <Route path='/terms/condition' element={<AuthUser cmp={Terms}/>}/>
