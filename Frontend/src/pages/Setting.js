@@ -4,7 +4,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { Link } from 'react-router-dom'
 import wa  from './img/wa.png'
 
-function Setting() {
+function SettingUser() {
   return (
     <div>
          <div>
@@ -39,4 +39,4 @@ function Setting() {
   )
 }
 
-export default Setting
+export default SettingUser
