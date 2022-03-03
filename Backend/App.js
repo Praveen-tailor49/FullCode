@@ -443,6 +443,25 @@ app.post('/remove/promotion', (req, res) => {
     )
 })
 
+
+app.post('/settings', (req, res) => {
+
+    const { callNumber, wpNumber, name, email, upiId } = req.body;
+    db.query(`INSERT INTO settings (callNumber, wpNumber, name, email, upiId) VALUES (?,?,?,?,?)`,
+        [callNumber, wpNumber, name, email, upiId],
+        (err, result) => {
+            if (err) {
+                res.status(400).json(err);
+            }
+            else {
+                res.status(200).json('Successfully');
+            }
+        }
+    )
+})
+
+
+
 app.post('/orders', (req, res) => {
 
     const { userId, userName, time, Period, cardtype, amount } = req.body;
