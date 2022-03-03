@@ -103,16 +103,17 @@ app.post('/addressDetails', (req, res) => {
 app.post('/showBankDetails', (req, res) => {
 
     const {userId} = req.body
+    console.log(userId);
 
     db.query(
-        `SELECT * FROM bankdetails WHERE userId='${userId}' AND userDelete=1`,
+        `SELECT * FROM bankdetails WHERE userId='${userId}' AND userDelete = 1`,
         (err, result) => {
             if(result.length === 0) {
                 res.json('Not add Bank Account ');
-            } else if(result.length === 1) {
+            } else if(result.length >=0) {
                 res.status(200).json({mess:'Successfully', data:result});
             } else {
-                res.status(400).json(err);
+                res.status(400).json({err:err, mess:'mess'});
             }
             
         }
@@ -166,12 +167,46 @@ app.post('/remove/AddressDetails', (req, res) => {
     )
 })
 
+app.post('/edit/AddDetails', (req, res) => {
+
+    const {userId, fullName, mobileNumber, pinCode, state, city, detaileAddress} = req.body
+
+    db.query(
+        `UPDATE  useraddress SET fullName='${fullName}', pinCode='${pinCode}', detaileAddress='${detaileAddress}',  state='${state}', city='${city}', mobileNumber='${mobileNumber}'  WHERE userId='${userId}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
 app.post('/remove/BankDetails', (req, res) => {
 
     const {userId} = req.body
 
     db.query(
         `UPDATE  bankdetails SET userDelete='0' WHERE userId='${userId}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
+app.post('/edit/BankDetails', (req, res) => {
+
+    const {userId, actualName, ifseCode, bankName, accountNumber, state, city, address, mobileNumber, email, upiAccount} = req.body
+
+    db.query(
+        `UPDATE  bankdetails SET actualName='${actualName}', ifseCode='${ifseCode}', bankName='${bankName}', accountNumber='${accountNumber}', state='${state}', city='${city}', address='${address}', mobileNumber='${mobileNumber}', email='${email}', upiAccount='${upiAccount}'  WHERE userId='${userId}'`,
         (err, result) => {
             if(result) {
                 res.status(200).json({mess:'Successfully'});
@@ -443,11 +478,30 @@ app.post('/remove/promotion', (req, res) => {
     )
 })
 
+
+app.post('/settings', (req, res) => {
+
+    const { callNumber, wpNumber, name, email, upiId } = req.body;
+    db.query(`INSERT INTO settings (callNumber, wpNumber, name, email, upiId) VALUES (?,?,?,?,?)`,
+        [callNumber, wpNumber, name, email, upiId],
+        (err, result) => {
+            if (err) {
+                res.status(400).json(err);
+            }
+            else {
+                res.status(200).json('Successfully');
+            }
+        }
+    )
+})
+
+
+
 app.post('/orders', (req, res) => {
 
-    const { userId, timePeriod, cardtype, amount } = req.body;
-    db.query(`INSERT INTO orders (userId, timePeriod, cardtype, amount) VALUES (?,?,?,?)`,
-        [userId, timePeriod, cardtype, amount],
+    const { userId, userName, time, Period, cardtype, amount } = req.body;
+    db.query(`INSERT INTO orders (userId, userName, time, Period, cardtype, amount) VALUES (?,?,?,?,?,?)`,
+        [userId, userName, time, Period, cardtype, amount],
         (err, result) => {
             if (err) {
                 res.status(400).json(err);
@@ -467,6 +521,23 @@ app.post('/showOrder', (req, res) => {
         }
     )
 })
+
+app.post('/remove/admin/order', (req, res) => {
+    const {Id} = req.body
+    db.query(
+        `DELETE FROM  orders WHERE Id='${Id}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+
+
 
 app.post('/result', (req, res) => {
 
@@ -513,9 +584,9 @@ app.post('/updateResult', (req, res) => {
 
 app.post('/rules', (req, res) => {
 
-    const { rules, status } = req.body;
-    db.query(`INSERT INTO rules (rules, status) VALUES (?,?)`,
-        [rules, status],
+    const { rules } = req.body;
+    db.query(`INSERT INTO rules (rules) VALUES (?)`,
+        [rules],
         (err, result) => {
             if (err) {
                 res.status(400).json(err);
@@ -523,6 +594,32 @@ app.post('/rules', (req, res) => {
             else {
                 res.status(200).json('Successfully');
             }
+        }
+    )
+})
+
+app.get('/showRules', (req, res) => {
+    db.query(
+        `SELECT * FROM rules`,
+        (err, result) => {
+            return res.json(result);
+        }
+    )
+})
+
+app.post('/update/rule/page', (req, res) => {
+
+    const {rules,Id} = req.body
+
+    db.query(
+        `UPDATE  rules SET rules='${rules }' WHERE Id ='${Id}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
         }
     )
 })
@@ -764,6 +861,18 @@ app.post('/showBankAdmin', (req, res) => {
         (err, result) => {
             return res.json(result);
         }
+    )
+})
+
+app.post('/adminLogin', (req, res) => {
+    const { email, password } = req.body;
+
+    if(email === '' || password === ''){
+        res.send('empty feild ')
+    } else if(email === 'admin123@gmail.com' && password === 'admin123'){
+        res.send('Successfully')
+    } else (
+        res.send('user not found')
     )
 })
 
