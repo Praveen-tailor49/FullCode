@@ -90,6 +90,7 @@ const AddBankCard = ({ baseUrl }) => {
                         progress: undefined,
                         });
                     showBankDetails();
+                    window.location.reload();
 
                 } else {
                     toast.error('Not Add', {
@@ -224,13 +225,22 @@ const AddBankCard = ({ baseUrl }) => {
                     <div style={{ display: 'flex', justifyContent: 'flex-end', width: '85vw' }}>
                         <div style={{ color: 'white', marginRight: '30px', cursor: 'pointer' }}>
                             <span onClick={() => {
-                                // setUserBankInfo({
-                                //     userId: ''
-                                //     , actualName: '', ifseCode: '', bankName: '', accountNumber: '', state: '', city: '', address: '', mobileNumber: '', email: '', upiAccount: '', userStatus: 0, userDelete: 1, val: ''
-                                // })
-                                document.getElementById('addDiv').style.display = 'block'
-                                document.getElementById('bankDiv').style.display = 'none'
-                                document.getElementById('editDiv').style.display = 'none'
+                                if(!userBankDetails){
+
+                                    document.getElementById('addDiv').style.display = 'block'
+                                    document.getElementById('bankDiv').style.display = 'none'
+                                    document.getElementById('editDiv').style.display = 'none'
+                                } else {
+                                    toast.error('Already Added', {
+                                        position: "top-right",
+                                        autoClose: 2000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                        });
+                                }
                             }}><AiOutlinePlus /></span>
                         </div>
                     </div>
@@ -399,7 +409,7 @@ const AddBankCard = ({ baseUrl }) => {
                                 }} >Cencel</Button>
                             </Col>
                             <Col>
-                                <Button variant="primary" onClick={(e) => updateBank(e)} >Edit</Button>
+                                <Button variant="primary" onClick={(e) => updateBank(e)} >Save</Button>
                             </Col>
                         </Row>
                     </Form>

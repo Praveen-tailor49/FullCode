@@ -140,7 +140,7 @@ const WinHeader = ({ baseUrl, userBalance }) => {
     return (
         <>
             <div style={{ backgroundColor: '#1E90FF', color: 'white' }}>
-                <p style={{ padding: '30px' }}>You can only withdraw cash after your bet amount recharge the top-up amount. For example, if you recharge 200rs, you can withdraw money only after your accumulated bet amountreaches 200rs. Our withdrawal time is 10:00-22:00, other time will not provide withdrawal services. </p>
+                <TopMessage style={{ padding: '30px' }}>You can only withdraw cash after your bet amount recharge the top-up amount. For example, if you recharge 200rs, you can withdraw money only after your accumulated bet amountreaches 200rs. Our withdrawal time is 10:00-22:00, other time will not provide withdrawal services. </TopMessage>
             </div>
             <div style={{ backgroundColor: '#6495ED', color: 'white', marginTop: '-16px' }}>
                 <div>
@@ -149,14 +149,14 @@ const WinHeader = ({ baseUrl, userBalance }) => {
 
                 <div style={{ display: 'flex', padding: '10px', justifyContent: 'center' }}>
                     <div >
-                        <Link to='/recharge'><Button variant="primary">Recharge</Button></Link>
+                        <Link to='/recharge'><HeaderButton variant="primary">Recharge</HeaderButton></Link>
                     </div>
                     <div style={{ marginLeft: '20px' }}>
-                        <Button variant="light" onClick={() => setModalShow1(true)}>Read Rule</Button>
+                        <HeaderButton variant="light" onClick={() => setModalShow1(true)}>Read Rule</HeaderButton>
                     </div>
 
                     <div style={{ marginLeft: '20px' }}>
-                        <Button variant="dark" onClick={refreshPage}>Reload<BiRefresh /></Button>
+                        <HeaderButton variant="dark" onClick={refreshPage}>Reload<BiRefresh /></HeaderButton>
                     </div>
                 </div>
             </div>
@@ -176,7 +176,7 @@ const WinHeader = ({ baseUrl, userBalance }) => {
                                 <div style={{ marginLeft: '10px' }}>
 
 
-                                    <h4>Period</h4>
+                                    <HeaderCount>Period</HeaderCount>
                                     <h5>20220210208</h5>
                                 </div>
                             </Col>
@@ -184,7 +184,7 @@ const WinHeader = ({ baseUrl, userBalance }) => {
                     </div>
 
                     <div style={{ marginLeft: '55px' }}>
-                        <h4>Count Down</h4>
+                        <HeaderCount>Count Down</HeaderCount>
                         <h4 >02:49</h4>
                     </div>
                 </div>
@@ -281,6 +281,28 @@ cursor:pointer;
 height: 7rem;
 @media screen and (min-width: 767px) {
     height: 10rem;
+  }
+
+`;
+
+const TopMessage = styled.p`
+ @media screen and (max-width: 626px) {
+    font-size: 11px;
+  }
+`;
+
+const HeaderCount = styled.h4`
+ @media screen and (max-width: 626px) {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+`;
+
+const HeaderButton = styled(Button)`
+ @media screen and (max-width: 626px) {
+    font-size: 10px;
+    
   }
 
 `;

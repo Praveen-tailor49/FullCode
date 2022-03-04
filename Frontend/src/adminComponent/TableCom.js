@@ -18,7 +18,7 @@ const TableCom = ({baseUrl}) => {
     const [userInfoData, setInfoData] = useState()
 
     const [addUserData, setAddUserData] = useState({
-        userName: '', userMobile: '', userPassword: '', userReCode: '', userBalance: '', userDelete: '', userStatus: '', userNickName: ''
+        userName: '', userMobile: '', userPassword: '', userReCode: '', userBalance: '', userDelete: '1', userStatus: '', userNickName: ''
     })
 
     useEffect(() => {
@@ -180,7 +180,7 @@ const TableCom = ({baseUrl}) => {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "Id": id
+            "userId": id
         });
 
         var requestOptions = {
@@ -190,11 +190,10 @@ const TableCom = ({baseUrl}) => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/remove/UserDetails", requestOptions)
+        fetch(baseUrl+"remove/UserDetails", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Successfully Remove')
                     toast.success('Successfully Remove', {
                         position: "top-right",
                         autoClose: 2000,
@@ -410,20 +409,18 @@ const TableCom = ({baseUrl}) => {
                                         <Form.Label>Balance</Form.Label>
                                         <Form.Control type="balance" name='userBalance' value={addUserData.userBalance} onChange={(e) => handShowAdd(e)} placeholder="Enter balance" />
                                     </Form.Group>    </Col>
-                                <Col> <Form.Group className="mb-3" controlId="formGroupdelete">
+                                {/* <Col> <Form.Group className="mb-3" controlId="formGroupdelete">
                                     <Form.Label>Delete</Form.Label>
 
                                     <Form.Select aria-label="Default select example" name='userDelete' value={addUserData.userDelete} onChange={(e) => handShowAdd(e)}>
-                                        <option>Select</option>
                                         <option value="1">Enable</option>
                                         <option value="0">Disable</option>
                                     </Form.Select>
                                 </Form.Group>
-                                </Col>
+                                </Col> */}
                                 <Col>
                                     <Form.Label>Status</Form.Label>
                                     <Form.Select aria-label="Default select example" name='userStatus' value={addUserData.userStatus} onChange={(e) => handShowAdd(e)}>
-                                        <option>Select</option>
                                         <option value="Enable">Enable</option>
                                         <option value="Disable">Disable</option>
 
