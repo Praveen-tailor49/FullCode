@@ -29,6 +29,7 @@ import WinTwo from './pages/WinTwo';
 import Payment from './pages/Payment';
 import Error404 from './pages/Error404';
 import Order from './adminPages/Order';
+import Period from './adminPages/Period';
 import GameResult from './adminPages/GameResult';
 import GameRules from './adminPages/GameRules';
 import Payments from './adminPages/Payment';
@@ -130,6 +131,7 @@ function App() {
           <Route path='/admin/ticket' element={<AuthAdmin cmp={Tickets}  baseUrl={baseUrl}/>}/>
           <Route path='/admin/gamesettings' element={<AuthAdmin cmp={Gamesetting}  baseUrl={baseUrl}/>}/>
           <Route path='/admin/Setting' element={<AuthAdmin cmp={Setting}  baseUrl={baseUrl}/>}/>
+          <Route path='/admin/Period' element={<AuthAdmin cmp={Period}  baseUrl={baseUrl}/>}/>
 
 
 

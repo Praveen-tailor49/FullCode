@@ -101,7 +101,7 @@ const AdminPage = () => {
                             <Item
                                 onClick={() => setClick(true)}
                                 activeClassName="active"
-                                to="/projects"
+                                to="/admin/Period"
                             >
                                 <AiOutlineTrophy />
                                 <Text clicked={click}>Period</Text>
