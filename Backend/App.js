@@ -51,10 +51,10 @@ app.post('/userLogin', (req, res) => {
 
 app.post('/user/resetPassword', (req, res) => {
 
-    const {userId, userPassword, userMobile} = req.body
+    const { userPassword, userMobile} = req.body
 
     db.query(
-        `UPDATE  users SET userPassword='${userPassword}'  WHERE userId='${userId}' AND userMobile  = '${userMobile}'`,
+        `UPDATE  users SET userPassword='${userPassword}'  WHERE userMobile  = '${userMobile}'`,
         (err, result) => {
             if(result) {
                 res.status(200).json({mess:'Successfully'});
@@ -85,10 +85,10 @@ app.post('/blankDetails', (req, res) => {
 
 app.post('/addressDetails', (req, res) => {
 
-    const {userId, fullName, mobileNumber, pinCode, state, city, detaileAddress, status, deleteStatus } = req.body
+    const {userId, fullName, mobile_number, pinCode, state, city, detaileAddress, status, deleteStatus } = req.body
 
     db.query(`INSERT INTO useraddress (userId, fullName, mobileNumber, pinCode, state, city, detaileAddress, status, deleteStatus) VALUES (?,?,?,?,?,?,?,?,?)`,
-    [userId, fullName, mobileNumber, pinCode, state, city, detaileAddress, status, deleteStatus],
+    [userId, fullName, mobile_number, pinCode, state, city, detaileAddress, status, deleteStatus],
     (err, result) => {
         if (err) {
             res.status(400).json(err);
@@ -131,6 +131,7 @@ app.post('/showAddressDetails', (req, res) => {
                 res.json('Not add Address ');
             } else if(result.length === 1) {
                 res.status(200).json({mess:'Successfully', data:result});
+                // res.status(200).json(result);
             } else {
                 res.status(400).json(err);
             }
@@ -169,10 +170,10 @@ app.post('/remove/AddressDetails', (req, res) => {
 
 app.post('/edit/AddDetails', (req, res) => {
 
-    const {userId, fullName, mobileNumber, pinCode, state, city, detaileAddress} = req.body
+    const {userId, fullName, mobile_number, pinCode, state, city, detaileAddress} = req.body
 
     db.query(
-        `UPDATE  useraddress SET fullName='${fullName}', pinCode='${pinCode}', detaileAddress='${detaileAddress}',  state='${state}', city='${city}', mobileNumber='${mobileNumber}'  WHERE userId='${userId}'`,
+        `UPDATE  useraddress SET fullName='${fullName}', pinCode='${pinCode}', detaileAddress='${detaileAddress}',  state='${state}', city='${city}', mobileNumber='${mobile_number}'  WHERE userId='${userId}' AND deleteStatus='1'`,
         (err, result) => {
             if(result) {
                 res.status(200).json({mess:'Successfully'});

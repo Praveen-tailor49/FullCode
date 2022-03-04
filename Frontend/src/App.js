@@ -3,7 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Routes, Route} from 'react-router-dom'
 import { Login } from './pages/Login';
-import { Register } from './pages/Register';
+import {Register}  from './pages/Register';
 import Win from './pages/Win';
 import MinePage from './pages/MinePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
