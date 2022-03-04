@@ -4,6 +4,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer';
+import { ToastContainer, toast } from 'react-toastify';
 // import ModalWin from '../components/ModalEditAdd';
 
 const AddBankCard = ({ baseUrl }) => {
@@ -40,7 +41,6 @@ const AddBankCard = ({ baseUrl }) => {
         fetch(baseUrl + "showBankDetails", requestOptions)
             .then(response => response.json())
             .then(result => {
-                console.log(result);
                 setUserBankDetails(result.data)
             }
             )
@@ -80,22 +80,40 @@ const AddBankCard = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Add Successfully')
+                    toast.success('Add Successfully', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     showBankDetails();
+                    window.location.reload();
 
                 } else {
-                    alert('Not Add')
+                    toast.error('Not Add', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
     }
 
-    const removeBankCard = () => {
+    const removeBankCard = (val) => {
+        console.log(val.id);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            "userId": localStorage.getItem('token')
+            "userId": val.id
         });
 
         var requestOptions = {
@@ -109,10 +127,26 @@ const AddBankCard = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('remove')
+                    toast.success('Remove', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     showBankDetails();
                 } else {
-                    alert('not remove')
+                    toast.error('Not Remove', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -154,12 +188,28 @@ const AddBankCard = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('edit')
+                    toast.success('Edit Successfully', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     document.getElementById('bankDiv').style.display = 'block'
                     document.getElementById('editDiv').style.display = 'none'
                     showBankDetails();
                 } else {
-                    alert('not edit')
+                    toast.error('Not Edit', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -175,13 +225,22 @@ const AddBankCard = ({ baseUrl }) => {
                     <div style={{ display: 'flex', justifyContent: 'flex-end', width: '85vw' }}>
                         <div style={{ color: 'white', marginRight: '30px', cursor: 'pointer' }}>
                             <span onClick={() => {
-                                // setUserBankInfo({
-                                //     userId: ''
-                                //     , actualName: '', ifseCode: '', bankName: '', accountNumber: '', state: '', city: '', address: '', mobileNumber: '', email: '', upiAccount: '', userStatus: 0, userDelete: 1, val: ''
-                                // })
-                                document.getElementById('addDiv').style.display = 'block'
-                                document.getElementById('bankDiv').style.display = 'none'
-                                document.getElementById('editDiv').style.display = 'none'
+                                if(!userBankDetails){
+
+                                    document.getElementById('addDiv').style.display = 'block'
+                                    document.getElementById('bankDiv').style.display = 'none'
+                                    document.getElementById('editDiv').style.display = 'none'
+                                } else {
+                                    toast.error('Already Added', {
+                                        position: "top-right",
+                                        autoClose: 2000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                        });
+                                }
                             }}><AiOutlinePlus /></span>
                         </div>
                     </div>
@@ -219,7 +278,7 @@ const AddBankCard = ({ baseUrl }) => {
                                                     <Button variant="primary" onClick={() => editBankCard(val)}>Edit</Button>
                                                 </div>
                                                 <div>
-                                                    <Button variant="danger" onClick={() => removeBankCard()}>Remove</Button>
+                                                    <Button variant="danger" onClick={() => removeBankCard(val)}>Remove</Button>
                                                 </div>
                                             </div>
                                         </Card.Body>
@@ -350,7 +409,7 @@ const AddBankCard = ({ baseUrl }) => {
                                 }} >Cencel</Button>
                             </Col>
                             <Col>
-                                <Button variant="primary" onClick={(e) => updateBank(e)} >Edit</Button>
+                                <Button variant="primary" onClick={(e) => updateBank(e)} >Save</Button>
                             </Col>
                         </Row>
                     </Form>
@@ -364,6 +423,7 @@ const AddBankCard = ({ baseUrl }) => {
                 userId={localStorage.getItem('token')}
             /> */}
             <Footer />
+            <ToastContainer />
         </>
     )
 }

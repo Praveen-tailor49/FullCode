@@ -3,16 +3,19 @@ import { Navbar, Form, Button, Card, Container, Row, Col } from 'react-bootstrap
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { Link } from 'react-router-dom'
 import Footer from '../components/Footer';
+import { ToastContainer, toast } from 'react-toastify';
 import { AiOutlinePlus } from 'react-icons/ai';
 
 
 const AddAddress = ({ baseUrl }) => {
 
+    console.log(baseUrl);
+
     const [userAddressInfo, setUserAddressInfo] = useState({
-        userId: localStorage.getItem('token'), fullName: '', mobileNumber: '', pinCode: '', state: '', city: '', detaileAddress: '', status: '1', deleteStatus: '1'
+        userId: localStorage.getItem('token'), fullName: '', mobile_number: '', pinCode: '', state: '', city: '', detaileAddress: '', status: '1', deleteStatus: '1'
     })
 
-    const [userAddressDetails, setUserAddressDetails] = useState([])
+    const [userAddressDetails, setUserAddressDetails] = useState()
 
 
     useEffect(() => {
@@ -21,7 +24,6 @@ const AddAddress = ({ baseUrl }) => {
 
 
     const showAddressDetails = () => {
-        document.getElementById('addDiv').style.display = 'none'
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -39,7 +41,8 @@ const AddAddress = ({ baseUrl }) => {
         fetch(baseUrl + "showAddressDetails", requestOptions)
             .then(response => response.json())
             .then(result => {
-                setUserAddressDetails(result.data)
+                console.log(result.data);
+                setUserAddressDetails(result.data);
             })
             .catch(error => console.log('error', error));
     }
@@ -57,13 +60,13 @@ const AddAddress = ({ baseUrl }) => {
 
         e.preventDefault()
 
-        const { userId, fullName, mobileNumber, pinCode, state, city, detaileAddress, status, deleteStatus } = userAddressInfo
+        const { userId, fullName, mobile_number, pinCode, state, city, detaileAddress, status, deleteStatus } = userAddressInfo
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            userId, fullName, mobileNumber, pinCode, state, city, detaileAddress, status, deleteStatus
+            userId, fullName, mobile_number, pinCode, state, city, detaileAddress, status, deleteStatus
         });
 
         var requestOptions = {
@@ -77,10 +80,28 @@ const AddAddress = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Add Successfully')
-                    showAddressDetails();
+                    toast.success('Add Successfully', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                        showAddressDetails();
+                        window.location.reload();
+                        document.getElementById('addDiv').style.display = 'none';
                 } else {
-                    alert('Not Add')
+                    toast.error('Not Add', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -105,10 +126,27 @@ const AddAddress = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('remove')
+                    toast.success('remove', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     showAddressDetails();
+                    
                 } else {
-                    alert('not remove')
+                    toast.error('Not remove', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -120,7 +158,7 @@ const AddAddress = ({ baseUrl }) => {
         document.getElementById('addUserDiv').style.display = 'none'
 
         setUserAddressInfo({
-            userId: val.userId, fullName: val.fullName, mobileNumber: val.mobileNumber, pinCode: val.pinCode, state: val.state, city: val.city, detaileAddress:val.detaileAddress
+            userId: val.userId, fullName: val.fullName, mobile_number: val.mobileNumber, pinCode: val.pinCode, state: val.state, city: val.city, detaileAddress:val.detaileAddress
         })
     }
 
@@ -128,13 +166,13 @@ const AddAddress = ({ baseUrl }) => {
 
         e.preventDefault()
 
-        const { userId, fullName, mobileNumber, pinCode, state, city, detaileAddress } = userAddressInfo
+        const { userId, fullName, mobile_number, pinCode, state, city, detaileAddress } = userAddressInfo
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-            userId, fullName, mobileNumber, pinCode, state, city, detaileAddress
+            userId, fullName, mobile_number, pinCode, state, city, detaileAddress
         });
 
         var requestOptions = {
@@ -148,12 +186,28 @@ const AddAddress = ({ baseUrl }) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('edit')
+                    toast.success('Successfully Edit', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     document.getElementById('addUserDiv').style.display = 'block'
                     document.getElementById('editDiv').style.display = 'none'
                     showAddressDetails();
                 } else {
-                    alert('not edit')
+                    toast.error('Not Edit', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -169,12 +223,23 @@ const AddAddress = ({ baseUrl }) => {
                     <div style={{ display: 'flex', justifyContent: 'flex-end', width: '85vw' }}>
                         <div style={{ color: 'white', marginRight: '30px', cursor: 'pointer' }}>
                             <span onClick={() => {
-                                userAddressInfo({
-                                    userId:'', fullName: '', mobileNumber: '', pinCode: '', state: '', city: '', detaileAddress: '', status: '1', deleteStatus: '1'
-                                })
-                                document.getElementById('addDiv').style.display = 'block'
-                                document.getElementById('addUserDiv').style.display = 'none'
-                                document.getElementById('editDiv').style.display = 'none'
+                                 if(!userAddressDetails){
+
+                                    document.getElementById('addDiv').style.display = 'block';
+                                    document.getElementById('addUserDiv').style.display = 'none';
+                                    document.getElementById('editDiv').style.display = 'none';
+                                } else {
+                                    toast.error('Already Added', {
+                                        position: "top-right",
+                                        autoClose: 2000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                        progress: undefined,
+                                        });
+                                }
+                               
                             }}><AiOutlinePlus /></span>
                         </div>
                     </div>
@@ -233,7 +298,7 @@ const AddAddress = ({ baseUrl }) => {
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Control type="text" placeholder="Mobile Number" name='mobileNumber' value={userAddressInfo.mobileNumber} onChange={HandlShow} />
+                            <Form.Control type="text" placeholder="Mobile Number" maxLength='10' name='mobile_number' value={userAddressInfo.mobile_number} onChange={HandlShow} />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -282,7 +347,7 @@ const AddAddress = ({ baseUrl }) => {
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicEmail">
-                            <Form.Control type="text" placeholder="Mobile Number" name='mobileNumber' value={userAddressInfo.mobileNumber} onChange={HandlShow} />
+                            <Form.Control type="text" placeholder="Mobile Number"  maxLength='10' name='mobile_number' value={userAddressInfo.mobile_number} onChange={HandlShow} />
                         </Form.Group>
 
                         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -320,6 +385,7 @@ const AddAddress = ({ baseUrl }) => {
                 </Container>
             </div>
             <Footer />
+            <ToastContainer />
         </>
     )
 }

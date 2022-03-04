@@ -4,7 +4,7 @@ import { IoMdArrowRoundBack } from 'react-icons/io';
 import {Link} from 'react-router-dom'
 import Footer from '../components/Footer';
 
-const RiskDisclosure = () => {
+const RiskDisclosure = ({baseUrl}) => {
     const [RoleRisk, setRole] = useState([])
 
 
@@ -14,7 +14,7 @@ const RiskDisclosure = () => {
       },[])
     
       const showRole = async () => {
-        const ress = await fetch('http://localhost:5000/show/role')
+        const ress = await fetch(baseUrl+'show/role')
         const role = await ress.json();
         setRole(role)
       }

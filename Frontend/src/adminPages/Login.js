@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Login.css'
 import {  useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import styled from 'styled-components'
 
 const LoginAdmin = () => {
@@ -34,11 +35,27 @@ const LoginAdmin = () => {
         const {email, password} = adminUser
         
         if(email === 'admin123@gmail.com' && password === 'admin@123'){
-            alert('login')
+            toast.success('Login Admin', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             localStorage.setItem('adtoken', 'ad1111/123' )
             navigate('/admin')
         } else {
-            alert('Email password is wrong')
+            toast.error('Email password is wrong', {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
         }
 
     }
@@ -75,6 +92,7 @@ const LoginAdmin = () => {
                 </div>
             </div>
         </Body>
+        <ToastContainer/>
         </>
     )
 }

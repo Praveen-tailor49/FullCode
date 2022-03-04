@@ -3,7 +3,7 @@ import NavBar from '../components/NavBar';
 import { Form, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
-
+import { ToastContainer, toast } from 'react-toastify';
 
 export const Login = ({baseUrl}) => {
 
@@ -56,11 +56,27 @@ export const Login = ({baseUrl}) => {
             .then(response => response.json())
             .then(result => {
                 if(result.mess === 'Successfully'){
-                    alert('login')
+                    toast.success('Successfully Login', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     localStorage.setItem('token', result.data[0].userId)
                     navigate('/win')
                 } else {
-                    alert('Mobile number and Password is wrong')
+                    toast.error('Mobile number and Password is wrong', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -100,6 +116,7 @@ export const Login = ({baseUrl}) => {
                 </Form>
             </div>
             <Footer />
+            <ToastContainer/>
         </>
     )
 }

@@ -1,9 +1,4 @@
 import React from 'react'
- 
-import styled from 'styled-components'
-// import { BiEdit } from 'react-icons/bi';
-// import { AiOutlineDelete } from 'react-icons/ai';
-// import { FcViewDetails } from 'react-icons/fc';
 import MaterialTable from "material-table";
 import AdminBackNav from '../adminComponent/AdminBackNav';
 
@@ -43,17 +38,3 @@ const TableCom = () => {
 
 export default TableCom
 
-// const Action = styled.div`
-//     display:flex;
-//     font-size: 20px;
-// `;
-
-// const Button = styled.div`
-//     margin-Left: 1.5rem;
-//     cursor: pointer;
-    
-
-//     @media screen and (min-width: 768px) {
-//         margin-Left: 5rem;
-//       }
-// `;

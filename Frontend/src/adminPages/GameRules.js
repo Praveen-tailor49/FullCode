@@ -1,14 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import AdminBackNav from '../adminComponent/AdminBackNav';
-import styled from 'styled-components'
-// import TextField  from '@mui/material/TextField' ;
-// import MaterialTable from "material-table";
-import MyEditor from './Myeditor'
-// import { Container } from '@material-ui/core';
 import {Container,Col,Row,Form,Button} from "react-bootstrap"
-import Myeditor from './Myeditor'
+import { ToastContainer, toast } from 'react-toastify';
 
-function GameRules() {
+function GameRules({ baseUrl }) {
   const [ruleC, setrules] = useState({
     rules:'', Id:''
   });
@@ -28,7 +23,7 @@ useEffect(() => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/showRules", requestOptions)
+        fetch(baseUrl+"showRules", requestOptions)
             .then(response => response.json())
             .then(result => {
               console.log(result)
@@ -60,14 +55,30 @@ useEffect(() => {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:5000/update/rule/page", requestOptions)
+        fetch(baseUrl+"update/rule/page", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Successfully Add')
+                    toast.success('Successfully Add', {
+                      position: "top-right",
+                      autoClose: 2000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      });
                 }
                 else {
-                    alert('err')
+                    toast.success('Not Successfully', {
+                      position: "top-right",
+                      autoClose: 2000,
+                      hideProgressBar: false,
+                      closeOnClick: true,
+                      pauseOnHover: true,
+                      draggable: true,
+                      progress: undefined,
+                      });
                 }
             })
             .catch(error => console.log('error', error));
@@ -121,20 +132,7 @@ useEffect(() => {
                </Container>
          
           </div>
-        {/* <div style={{padding:'30px'}}>
-        
-   
-
-        <TextField
-          id="outlined-multiline-static"
-          label="Multiline"
-          multiline
-          rows={10}
-          
-          
-        />
-
-       </div> */}
+          <ToastContainer/>
 
     </>
   )

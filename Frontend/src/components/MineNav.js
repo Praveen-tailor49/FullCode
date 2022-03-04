@@ -37,8 +37,6 @@ const MineNav = ({ baseUrl }) => {
         navigate('/')
     }
 
-
-
     return (
         <>
             <div>
@@ -55,15 +53,6 @@ const MineNav = ({ baseUrl }) => {
                             <Button variant="outline-danger" style={{color:'white'}} onClick={(e) => logOutUser()}>Logout</Button>
                         </Stack>
                     </Container>
-
-                    {/* <div style={{ display: 'flex', justifyContent: 'flex-end', color: 'white' }} >
-                        <div>
-                            <BsFiles />
-                        </div>
-                        <div>
-                            <FiMenu />
-                        </div>
-                    </div> */}
                 </Navbar>
             </div>
 

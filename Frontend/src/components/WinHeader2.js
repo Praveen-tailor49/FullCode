@@ -1,72 +1,70 @@
 import React, { useState, useEffect } from 'react'
 import { BiRupee, BiRefresh } from 'react-icons/bi';
 import { AiFillTrophy } from 'react-icons/ai';
-// import { HiOutlineCurrencyRupee } from 'react-icons/hi';
-
 import { Button, Container, Card, Row, Col } from 'react-bootstrap';
-// import ModalWin from './ModalWin';
 import ModalReadRule from './ModalReadRule';
 import { Link } from 'react-router-dom'
 import coin1 from '../image/coins-img/coin-1.png'
 import coin2 from '../image/coins-img/coin-2.png'
 import coin3 from '../image/coins-img/coin-3.png'
-// import coin4 from '../image/coins-img/coin-4.png'
-// import coin5 from '../image/coins-img/coin-5.png'
 import coin6 from '../image/coins-img/coin-6.png'
-// import coin7 from '../image/coins-img/coin-7.png'
-// import coin8 from '../image/coins-img/coin-8.png'
 import coin10 from '../image/coins-img/coin-10.png'
-// import custom from '../image/coins-img/coin-custom.png'
-// import card1 from '../image/cards/card-1.png'
-// import card2 from '../image/cards/card-2.png'
-// import card3 from '../image/cards/card-3.png'
 import ModalRupesSelect from './ModalRupesSelect';
 import styled from 'styled-components'
-// import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
-
-// let buttonColor1 = document.getElementsByClassName("button")
-
-
+const WinHeader = ({ baseUrl, userBalance }) => {
     
-const WinHeader = ({userBalance}) => {
-    // const [buttonColor1, setButtonColor1] = useState()
-    // const [modalShow, setModalShow] = useState(false);
     const [modalShow1, setModalShow1] = useState(false);
     const [modalShow2, setModalShow2] = useState(false);
     const [valueRupess, setValueRupess] = useState('10');
     const [cardValue, setCardValue] = useState('');
 
-    const refreshPage = ()=>{
+    const refreshPage = () => {
         window.location.reload();
-     }
+    }
 
     const checkoutOrder = (val) => {
         showModal2(val)
         console.log(val);
         var myHeaders = new Headers()
         myHeaders.append("Content-Type", "application/json");
-  
-        var raw = JSON.stringify({ "userId": localStorage.getItem("token"), "userName": "surbhi", "time":2.15, "cardtype": cardValue, "amount": valueRupess ,"Period": 20220210208});
-  
+
+        var raw = JSON.stringify({ "userId": localStorage.getItem("token"), "userName": "surbhi", "time": 2.15, "cardtype": cardValue, "amount": valueRupess, "Period": 20220210208 });
+
         var requestOptions = {
             method: 'POST',
             headers: myHeaders,
             body: raw,
             redirect: 'follow'
         };
-  
-        fetch("http://localhost:5000/orders", requestOptions)
+
+        fetch(baseUrl +"orders", requestOptions)
             .then(response => response.json())
             .then(result => {
                 if (result === 'Successfully') {
-                    
-                    alert('Successfully Add ')
-                    
+                    toast.success('Successfully Add', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+
                 } else {
                     alert('Login Required')
+                    toast.error('Login Required', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             })
             .catch(error => console.log('error', error));
@@ -137,25 +135,12 @@ const WinHeader = ({userBalance}) => {
             document.getElementById("green").style.boxShadow = "1px  1px grey"
 
         }
-
-
-        // else {
-        //     toast.error('Please Select a Card First. From A/B/T', {
-        //         position: "top-right",
-        //         autoClose: 2000,
-        //         hideProgressBar: false,
-        //         closeOnClick: true,
-        //         pauseOnHover: true,
-        //         draggable: true,
-        //         progress: undefined,
-        //         });
-        // }
     }
 
     return (
         <>
             <div style={{ backgroundColor: '#1E90FF', color: 'white' }}>
-                <p style={{ padding: '30px' }}>You can only withdraw cash after your bet amount recharge the top-up amount. For example, if you recharge 200rs, you can withdraw money only after your accumulated bet amountreaches 200rs. Our withdrawal time is 10:00-22:00, other time will not provide withdrawal services. </p>
+                <TopMessage style={{ padding: '30px' }}>You can only withdraw cash after your bet amount recharge the top-up amount. For example, if you recharge 200rs, you can withdraw money only after your accumulated bet amountreaches 200rs. Our withdrawal time is 10:00-22:00, other time will not provide withdrawal services. </TopMessage>
             </div>
             <div style={{ backgroundColor: '#6495ED', color: 'white', marginTop: '-16px' }}>
                 <div>
@@ -164,14 +149,14 @@ const WinHeader = ({userBalance}) => {
 
                 <div style={{ display: 'flex', padding: '10px', justifyContent: 'center' }}>
                     <div >
-                        <Link to='/recharge'><Button variant="primary">Recharge</Button></Link>
+                        <Link to='/recharge'><HeaderButton variant="primary">Recharge</HeaderButton></Link>
                     </div>
                     <div style={{ marginLeft: '20px' }}>
-                        <Button variant="light" onClick={() => setModalShow1(true)}>Read Rule</Button>
+                        <HeaderButton variant="light" onClick={() => setModalShow1(true)}>Read Rule</HeaderButton>
                     </div>
 
                     <div style={{ marginLeft: '20px' }}>
-                        <Button variant="dark" onClick={refreshPage}>Reload<BiRefresh /></Button>
+                        <HeaderButton variant="dark" onClick={refreshPage}>Reload<BiRefresh /></HeaderButton>
                     </div>
                 </div>
             </div>
@@ -191,7 +176,7 @@ const WinHeader = ({userBalance}) => {
                                 <div style={{ marginLeft: '10px' }}>
 
 
-                                    <h4>Period</h4>
+                                    <HeaderCount>Period</HeaderCount>
                                     <h5>20220210208</h5>
                                 </div>
                             </Col>
@@ -199,7 +184,7 @@ const WinHeader = ({userBalance}) => {
                     </div>
 
                     <div style={{ marginLeft: '55px' }}>
-                        <h4>Count Down</h4>
+                        <HeaderCount>Count Down</HeaderCount>
                         <h4 >02:49</h4>
                     </div>
                 </div>
@@ -210,7 +195,7 @@ const WinHeader = ({userBalance}) => {
 
 
                     <CardDiv id="tie" onClick={() => checkoutOrder('tie')} style={{
-                        width: '58rem',  backgroundColor: "green", borderRadius: "25px",
+                        width: '58rem', backgroundColor: "green", borderRadius: "25px",
                         border: "5px solid #e4d00a", marginBottom: "5px"
                     }}><div className='main1' style={{ height: "1.5rem", borderRadius: "25px 26px 0px 0px", backgroundColor: "darkgreen", display: "flex", justifyContent: "space-between" }} >
                         </div>
@@ -222,29 +207,19 @@ const WinHeader = ({userBalance}) => {
                 </div>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <CardDiv id="andar" onClick={() => checkoutOrder('andar')} style={{
-                        width: '29rem',  borderRadius: "25px 25px 25px 180px", backgroundColor: "blue",
+                        width: '29rem', borderRadius: "25px 25px 25px 180px", backgroundColor: "blue",
                         border: "5px solid #e4d00a", marginRight: "4px", marginBottom: "10px"
                     }}><div style={{ height: "1.5rem", borderRadius: "10px 10px 5px 4px", backgroundColor: "darkblue", display: "flex", justifyContent: "space-between" }}>
-                            <div style={{ display: 'flex' }}>
-
-                        
-                                {/* <div style={{ color: "white", marginRight: "8px" }}>Can bet:415710624</div> */}
-                            </div>
-</div>
+                        </div>
                         <FontSize >Andar</FontSize>
                         <Card.Img variant="top" src="" />
 
                     </CardDiv>
                     <CardDiv id="bahar" onClick={() => checkoutOrder('bahar')} style={{
-                        width: '29rem',  borderRadius: "25px 25px 180px 25px",
+                        width: '29rem', borderRadius: "25px 25px 180px 25px",
                         backgroundColor: "red",
                         border: "5px solid #e4d00a"
                     }}><div style={{ height: "1.5rem", borderRadius: "10px 10px 5px 0px", backgroundColor: "darkred", display: "flex", justifyContent: "space-between" }}>
-                            <div style={{ display: 'flex' }}>
-
-
-                                {/* <div style={{ color: "white", marginRight: "8px" }}>Can bet:415710624</div> */}
-                            </div>
                         </div>
                         <FontSize >Bahar</FontSize>
                         <Card.Img variant="top" src="" />
@@ -276,20 +251,9 @@ const WinHeader = ({userBalance}) => {
                             <img id="img10000" src={coin6} style={{ boxShadow: '1px 1px gray', width: '5rem', borderRadius: '50rem', background: '#10B99D' }} alt='coin6' onClick={() => showDiv('10000')} />
                         </div>
 
-
-
-                        {/* <div >
-                            <img src={custom} style={{ boxShadow: '1px 1px gray', width: '5rem', borderRadius: '50rem', background: '#AAA64D' }} alt='coin8' onClick={() => setModalShow(true)} />
-                        </div> */}
-
                     </CoinCnterDiv>
                 </Container>
             </CoinDiv>
-
-            {/* <ModalWin
-                show={modalShow}
-                onHide={() => setModalShow(false)}
-            /> */}
 
             <ModalReadRule
                 show={modalShow1}
@@ -303,7 +267,7 @@ const WinHeader = ({userBalance}) => {
                 cardValue={cardValue}
             />
 
-            {/* <ToastContainer /> */}
+            <ToastContainer />
         </>
     )
 }
@@ -317,6 +281,28 @@ cursor:pointer;
 height: 7rem;
 @media screen and (min-width: 767px) {
     height: 10rem;
+  }
+
+`;
+
+const TopMessage = styled.p`
+ @media screen and (max-width: 626px) {
+    font-size: 11px;
+  }
+`;
+
+const HeaderCount = styled.h4`
+ @media screen and (max-width: 626px) {
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+`;
+
+const HeaderButton = styled(Button)`
+ @media screen and (max-width: 626px) {
+    font-size: 10px;
+    
   }
 
 `;
@@ -360,14 +346,3 @@ padding: 1rem;
   }
 
 `
-
-{/* .design::before{
-    content: '';
-    "width": 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: #ffee10;
-    transition: .5s ;
-    transform: scale(.9);
-    z-index: -1;
-} */}

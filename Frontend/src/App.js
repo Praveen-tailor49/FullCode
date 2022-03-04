@@ -3,7 +3,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Routes, Route} from 'react-router-dom'
 import { Login } from './pages/Login';
-import { Register } from './pages/Register';
+import {Register}  from './pages/Register';
 import Win from './pages/Win';
 import MinePage from './pages/MinePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -29,17 +29,20 @@ import WinTwo from './pages/WinTwo';
 import Payment from './pages/Payment';
 import Error404 from './pages/Error404';
 import Order from './adminPages/Order';
+import Period from './adminPages/Period';
 import GameResult from './adminPages/GameResult';
 import GameRules from './adminPages/GameRules';
 import Payments from './adminPages/Payment';
-import GameTC from './adminPages/GameTC';
+// import GameTC from './adminPages/GameTC';
 import Promotions from './adminPages/Promotions';
 import Wallet from './adminPages/Wallet'
 import Tickets from './adminPages/Tickets'
 import Gamesetting from './adminPages/Gamesetting'
+import Setting from './adminPages/Setting'
+
 import LoginAdmin from './adminPages/Login'
 import Ticket from './pages/Ticket';
-import Setting from './pages/Setting';
+import SettingUser from './pages/Setting';
 import AuthAdmin from './AuthAdmin';
 // import AdminLogin from './adminPages/AdminLogin'
 
@@ -123,11 +126,13 @@ function App() {
           <Route path='/GameResult' element={<AuthAdmin cmp={GameResult} baseUrl={baseUrl}/>}/>
           <Route path='/GameRules' element={<AuthAdmin cmp={GameRules} baseUrl={baseUrl}/>}/>
           <Route path='/payments' element={<AuthAdmin cmp={Payments} baseUrl={baseUrl}/>}/>
-          <Route path='/GameTC' element={<AuthAdmin cmp={GameTC} baseUrl={baseUrl}/>}/>
+          {/* <Route path='/GameTC' element={<AuthAdmin cmp={GameTC} baseUrl={baseUrl}/>}/> */}
           <Route path='/user/wallet' element={<AuthAdmin cmp={Wallet}  baseUrl={baseUrl}/>}/>
           <Route path='/admin/ticket' element={<AuthAdmin cmp={Tickets}  baseUrl={baseUrl}/>}/>
           <Route path='/admin/gamesettings' element={<AuthAdmin cmp={Gamesetting}  baseUrl={baseUrl}/>}/>
-          
+          <Route path='/admin/Setting' element={<AuthAdmin cmp={Setting}  baseUrl={baseUrl}/>}/>
+          <Route path='/admin/Period' element={<AuthAdmin cmp={Period}  baseUrl={baseUrl}/>}/>
+
 
 
 
@@ -150,7 +155,7 @@ function App() {
           <Route path='/recharge' element={<AuthUser cmp={Recharge} userBalance={userBalance}/>}/>
           <Route path='/payment' element={<AuthUser cmp={Payment}  baseUrl={baseUrl}/>}/>
           <Route path='/user/ticket' element={<AuthUser  cmp={Ticket}  baseUrl={baseUrl}/>}/>
-          <Route path='/setting' element={<AuthUser  cmp={Setting}  baseUrl={baseUrl}/>}/>
+          <Route path='/user/setting' element={<AuthUser  cmp={SettingUser}  baseUrl={baseUrl}/>}/>
       </Routes>
         
     </>
