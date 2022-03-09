@@ -133,7 +133,7 @@ const AdminPage = () => {
                             <Item
                                 onClick={() => setClick(true)}
                                 activeClassName="active"
-                                to="/user/gamesettings"
+                                to="/admin/gamesettings"
                             >
                                 <AiOutlineSetting />
                                 <Text clicked={click}>Game Setting</Text>

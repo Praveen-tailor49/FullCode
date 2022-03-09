@@ -10,13 +10,13 @@ const Terms = ({baseUrl}) => {
 
     useEffect(() => {
         showTerms();
-    
       },[])
     
       const showTerms = async () => {
         const ress = await fetch(baseUrl+'show/terms')
         const terms = await ress.json();
         setTerms(terms)
+        console.log(terms);
       }
 
     return (

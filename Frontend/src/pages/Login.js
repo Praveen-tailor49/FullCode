@@ -115,7 +115,7 @@ export const Login = ({baseUrl}) => {
                     </div>
                 </Form>
             </div>
-            <Footer />
+            <Footer/>
             <ToastContainer/>
         </>
     )

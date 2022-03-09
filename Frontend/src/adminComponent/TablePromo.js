@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Form, Col, Row, Button } from 'react-bootstrap';
-// import styled from 'styled-components'
+import { ToastContainer, toast } from 'react-toastify';
 import { IoMdAddCircle } from 'react-icons/io';
-
-// import { BiEdit } from 'react-icons/bi';
-// import { AiOutlineDelete } from 'react-icons/ai';
-// import { FcViewDetails } from 'react-icons/fc';
 import MaterialTable from "material-table";
 const TablePromo = ({baseUrl}) => {
     const [Addpromotion, setaddpromo] = useState({
@@ -90,7 +86,15 @@ const TablePromo = ({baseUrl}) => {
             .then(response => response.json())
             .then(result => {
                 if (result === 'Successfully') {
-                    alert('Successfully')
+                    toast.success('Successfully Add', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     hidePromo()
                     showpromo()
                 }
@@ -135,7 +139,15 @@ const TablePromo = ({baseUrl}) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Successfully edit')
+                    toast.success('Successfully Edit', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     document.getElementById('editDiv').style.display = 'none';
                     document.getElementById('promoTable').style.display = 'block';
                     showpromo()
@@ -163,7 +175,15 @@ const TablePromo = ({baseUrl}) => {
             .then(response => response.json())
             .then(result => {
                 if (result.mess === 'Successfully') {
-                    alert('Successfully Remove')
+                    toast.success('Successfully Remove', {
+                        position: "top-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     showpromo()
                 }
             })
@@ -232,7 +252,6 @@ const TablePromo = ({baseUrl}) => {
                                 <Col>
                                     <Form.Label>Status</Form.Label>
                                     <Form.Select aria-label="Default select example" name="promoStatus" value={Addpromotion.promoStatus} onChange={(e) => handleShow(e)}>
-                                        <option>Select</option>
                                         <option value="Enable">Enable</option>
                                         <option value="Disable">Disable</option>
                                     </Form.Select>
@@ -295,6 +314,7 @@ const TablePromo = ({baseUrl}) => {
                     </Form>
                 </Container>
             </div>
+            <ToastContainer/>
         </>
     )
 }
