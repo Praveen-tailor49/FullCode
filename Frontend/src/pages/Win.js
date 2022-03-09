@@ -4,12 +4,12 @@ import TableWin from '../components/TableWin';
 import WinHeader from '../components/WinHeader2';
 
 
-const Win = ({userBalance}) => {
+const Win = ({userBalance, baseUrl}) => {
     return (
         <>
             {/* <WinNav/> */}
             {/* <WinHeader/> */}
-            <WinHeader userBalance={userBalance}/>
+            <WinHeader userBalance={userBalance} baseUrl={baseUrl}/>
             <TableWin/>
             <Footer/>
         </>

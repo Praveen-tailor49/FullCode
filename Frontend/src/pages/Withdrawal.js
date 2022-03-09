@@ -94,7 +94,7 @@ const Withdrawal = ({userBalance}) => {
                 </div>
             </div>
 
-            <Footer />
+            <Footer/>
         </>
     )
 }

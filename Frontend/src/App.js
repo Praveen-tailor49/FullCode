@@ -49,9 +49,11 @@ import AuthAdmin from './AuthAdmin';
 
 function App() {
 
-  const baseUrl = 'http://localhost:5000/';
+  const baseUrl = 'http://139.59.4.162:5000/';
+  
   const [userData, setUserData] = useState([])
   const [userBalance, setUserBalance] = useState('')
+  const [ userName, setUserName] = useState('')
 
     useEffect(() => {
       var myHeaders = new Headers();
@@ -73,6 +75,7 @@ function App() {
           .then(result => {
             setUserBalance(result[0].userBalance)
             setUserData(result)
+            setUserName(result[0].userName)
           })
           .catch(error => console.log('error', error));
   }, [])
@@ -138,10 +141,10 @@ function App() {
 
           {/* User Auth */}
 
-          <Route path='/win' element={<AuthUser cmp={Win} userBalance={userBalance} />}/>
+          <Route path='/win' element={<AuthUser cmp={Win} baseUrl={baseUrl} userBalance={userBalance} userName={userName} />}/>
           <Route path='/mine' element={<AuthUser cmp={MinePage} baseUrl={baseUrl} userData={userData}/>}/>
-          <Route path='/privacy/policy' element={<AuthUser cmp={PrivacyPolicy}/>}/>
-          <Route path='/terms/condition' element={<AuthUser cmp={Terms}/>}/>
+          <Route path='/privacy/policy' element={<AuthUser baseUrl={baseUrl} cmp={PrivacyPolicy}/>}/>
+          <Route path='/terms/condition' element={<AuthUser baseUrl={baseUrl} cmp={Terms}/>}/>
           <Route path='/about' element={<AuthUser cmp={About}/>}/>
           {/* <Route path='/reset/password' element={<AuthUser cpm={ResetPassword}/>}/> */}
           <Route path='/add/address' element={<AuthUser cmp={AddAddress}  baseUrl={baseUrl}/>}/>
@@ -151,7 +154,7 @@ function App() {
           <Route path='/ComplaintsSuggestions' element={<AuthUser cmp={ComplaintsSuggestions} baseUrl={baseUrl}/>}/>
           <Route path='/promotion' element={<AuthUser cmp={Promotion}  baseUrl={baseUrl} userBalance={userBalance}/>}/>
           <Route path='/transactions' element={<AuthUser cmp={Transactions}/>}/>
-          <Route path='/RiskDisclosure' element={<AuthUser cmp={RiskDisclosureAgreement}/>}/>
+          <Route path='/RiskDisclosure' element={<AuthUser cmp={RiskDisclosureAgreement} baseUrl={baseUrl}/>}/>
           <Route path='/recharge' element={<AuthUser cmp={Recharge} userBalance={userBalance}/>}/>
           <Route path='/payment' element={<AuthUser cmp={Payment}  baseUrl={baseUrl}/>}/>
           <Route path='/user/ticket' element={<AuthUser  cmp={Ticket}  baseUrl={baseUrl}/>}/>

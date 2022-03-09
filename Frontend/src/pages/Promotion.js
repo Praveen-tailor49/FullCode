@@ -8,6 +8,7 @@ import Footer from '../components/Footer';
 const Promotion = ({baseUrl, userBalance}) => {
 
     const [promo, setpromo] = useState([])
+   
 
     useEffect(() => {
 

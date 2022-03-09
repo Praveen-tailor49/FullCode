@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Switch from "react-switch";
-import {Card,Row} from "react-bootstrap"
+import { Card, Row, Form, Col, DropdownButton, Dropdown, Button } from "react-bootstrap"
+import AdminBackNav from '../adminComponent/AdminBackNav';
 
 export default class Gamesetting extends Component {
   constructor() {
@@ -9,7 +9,7 @@ export default class Gamesetting extends Component {
     this.handleChange1 = this.handleChange1.bind(this);
     this.handleChange2 = this.handleChange2.bind(this);
     this.handleChange3 = this.handleChange3.bind(this);
-  }
+  }   
 
   handleChange1(checked1) {
     this.setState({ checked1 });
@@ -23,25 +23,106 @@ export default class Gamesetting extends Component {
     this.setState({ checked3 });
   }
 
+ check = () =>{
+   document.getElementById('showDiv').style.display= 'Block'
+ }
+
   render() {
     return (
- <div style={{display:"flex",justifyContent:"center",marginTop:"5rem"}}>
- <Card style={{width:"50rem", height:"30rem",boxShadow: "10px 10px 5px lightgray"}} >
- <h3 style={{textAlign:"center",color:"gray",marginTop:"40px", textShadow:"2px 2px lightgray"}}>Game Setting</h3>
- <hr ></hr>
-     <Row style={{margin:"auto"}}>
-    
-         <div style={{display:"flex",justifyContent:"space-around"}} > <h3>A</h3> <Switch onChange={this.handleChange1} checked={this.state.checked1} /> </div>
-         <div style={{display:"flex",justifyContent:"space-around"}}> <h3>B</h3> <Switch onChange={this.handleChange2} checked={this.state.checked2} /> </div>
-        <div style={{display:"flex",justifyContent:"space-around"}}> <h3>C</h3> <Switch onChange={this.handleChange3} checked={this.state.checked3} /> </div>
-   
-    
-     </Row>
+      <>
+        <AdminBackNav />
+        <div style={{ marginTop: "6rem", display: "flex", justifyContent: "center" }}>
+          <Card style={{ width: "50rem", height: "30rem", boxShadow: "5px 5px 5px gray" }} >
+            <h4 style={{ textAlign: "center", color: "gray", marginTop: "2rem" }}>Game Settings</h4>
+            <hr></hr>
+            <Form style={{ margin: "auto", padding: "20px" }}>
+              {['radio'].map((type) => (
+                <div key={`inline-${type}`} className="mb-3">
 
-</Card>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Row>
 
-</div>
-       
+                      <Row>
+                        <Col>
+                          <Form.Check
+                            inline
+                            onClick={this.check('first')}
+                            name="group1"
+                            type={type}
+                            id={`inline-${type}-1`}
+                          />
+                        </Col>
+
+                        <Col>
+                          <div>
+                            Select Winner
+                          </div>
+                        </Col>
+
+                        <Col style={{display:'none'}} id='showDiv'>
+                          <DropdownButton align="Center" title="Choose" id="dropdown-menu-align-Center">
+                            <Dropdown.Item eventKey="1">A</Dropdown.Item>
+                            <Dropdown.Item eventKey="2">B</Dropdown.Item>
+                            <Dropdown.Item eventKey="3">T</Dropdown.Item>
+                          </DropdownButton>
+                        </Col>
+
+                      </Row>
+
+                      <Row>
+                        <Col>
+                          <Form.Check
+                            inline
+                            onClick={this.check('sec')}
+                            name="group1"
+                            type={type}
+                            id={`inline-${type}-1`}
+                          />
+                        </Col>
+
+                        <Col>
+                          <div>
+                            Minimum winner
+                          </div>
+                        </Col>
+
+                        <Col>
+
+                        </Col>
+
+
+                      </Row>
+
+                      {/* 3rd */}
+                      <Row style={{ marginTop: "8rem" }}>
+                        <Col>
+
+                        </Col>
+
+                        <Col>
+                          <Button variant="success">Save</Button>{' '}
+                        </Col>
+
+                        <Col >
+
+                        </Col>
+
+
+                      </Row>
+
+                      {/* 3rdend */}
+
+
+                    </Row>
+                  </div>
+                </div>
+
+              )
+              )}
+            </Form>
+          </Card>
+        </div>
+      </>
     );
   }
 }
