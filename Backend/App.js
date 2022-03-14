@@ -12,7 +12,12 @@ const db = mysql.createConnection({
     user: 'root',
     host: 'localhost',
     database: 'game',
+    password:'andwegame'
 });
+
+app.get('/', (req, res)=>{
+    res.send('connect')
+})
 
 app.post('/signUp', (req, res) => {
 
@@ -103,7 +108,6 @@ app.post('/addressDetails', (req, res) => {
 app.post('/showBankDetails', (req, res) => {
 
     const {userId} = req.body
-    console.log(userId);
 
     db.query(
         `SELECT * FROM bankdetails WHERE userId='${userId}' AND userDelete = 1`,
@@ -540,7 +544,7 @@ app.post('/remove/settings', (req, res) => {
 
 
 
-app.post('/orders', (req, res) => {
+app.post('/user/orders', (req, res) => {
 
     const { userId, userName, time, Period, cardtype, amount } = req.body;
     db.query(`INSERT INTO orders (userId, userName, time, Period, cardtype, amount) VALUES (?,?,?,?,?,?)`,
@@ -609,10 +613,23 @@ app.post('/showResult', (req, res) => {
 
 app.post('/updateResult', (req, res) => {
     const { resultID, record, updateResult } = req.body;
-    console.log(resultID);
     
     db.query(
         `UPDATE result SET record= '${record}', result='${updateResult}' WHERE Id='${resultID}'`,
+        (err, result) => {
+            if(result) {
+                res.status(200).json({mess:'Successfully'});
+            }else {
+                res.status(400).json(err);
+            }
+            
+        }
+    )
+})
+app.post('/remove/admin/result', (req, res) => {
+    const {Id} = req.body
+    db.query(
+        `DELETE FROM  result WHERE Id='${Id}'`,
         (err, result) => {
             if(result) {
                 res.status(200).json({mess:'Successfully'});
@@ -874,7 +891,7 @@ app.post('/edit/adminUser', (req, res) => {
 app.post('/showUserAdmin', (req, res) => {
 
     const {userId} = req.body
-    console.log(userId);
+
     db.query(
         `SELECT * FROM users WHERE userId = ${userId}`,
         (err, result) => {
@@ -886,7 +903,7 @@ app.post('/showUserAdmin', (req, res) => {
 app.post('/showAddressAdmin', (req, res) => {
 
     const {userId} = req.body
-    console.log(userId);  
+
     db.query(
         `SELECT * FROM useraddress WHERE userId = ${userId} AND deleteStatus = '1'`,
         (err, result) => {
@@ -898,7 +915,6 @@ app.post('/showAddressAdmin', (req, res) => {
 app.post('/showBankAdmin', (req, res) => {
 
     const {userId} = req.body
-    console.log(userId);
     db.query(
         `SELECT * FROM bankdetails WHERE userId = ${userId} AND userDelete ='1'`,
         (err, result) => {

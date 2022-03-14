@@ -14,24 +14,58 @@ import styled from 'styled-components'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const WinHeader = ({ baseUrl, userBalance }) => {
-    
+const WinHeader = ({ baseUrl}) => {
+
     const [modalShow1, setModalShow1] = useState(false);
     const [modalShow2, setModalShow2] = useState(false);
     const [valueRupess, setValueRupess] = useState('10');
     const [cardValue, setCardValue] = useState('');
+    const [userBalance, setUserBalance] = useState('')
+    const [ userName, setUserName] = useState('')
+
+    useEffect(() => {
+
+        document.getElementById("img10").style.boxShadow = "0px 0px 30px 2px green"
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+  
+        var raw = JSON.stringify({
+            "userId": localStorage.getItem('token')
+        });
+  
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        };
+  
+        fetch(baseUrl + "showUserAdmin", requestOptions)
+            .then(response => response.json())
+            .then(result => {
+              setUserBalance(result[0].userBalance)
+              setUserName(result[0].userName)
+            })
+            .catch(error => console.log('error', error));
+    }, [])
 
     const refreshPage = () => {
         window.location.reload();
     }
 
+
     const checkoutOrder = (val) => {
-        showModal2(val)
-        console.log(val);
-        var myHeaders = new Headers()
+
+        // setCardValue(val)
+        // showModal2(val)
+
+        var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({ "userId": localStorage.getItem("token"), "userName": "surbhi", "time": 2.15, "cardtype": cardValue, "amount": valueRupess, "Period": 20220210208 });
+        var raw = JSON.stringify({
+            "userId": localStorage.getItem("token"), "userName": userName, "time": 2.15, "cardtype": val, "amount": valueRupess, "Period": 20220210208
+        });
 
         var requestOptions = {
             method: 'POST',
@@ -40,43 +74,39 @@ const WinHeader = ({ baseUrl, userBalance }) => {
             redirect: 'follow'
         };
 
-        fetch(baseUrl +"orders", requestOptions)
-            .then(response => response.json())
-            .then(result => {
-                if (result === 'Successfully') {
-                    toast.success('Successfully Add', {
-                        position: "top-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        });
+        fetch(baseUrl+"user/orders", requestOptions)
+        .then(response => response.json())
+        .then(result => {
+            if (result === 'Successfully') {
+                toast.success('Successfully Order', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
 
-                } else {
-                    alert('Login Required')
-                    toast.error('Login Required', {
-                        position: "top-right",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        });
-                }
-            })
-            .catch(error => console.log('error', error));
+            } else {
+                toast.error('Not Order', {
+                    position: "top-right",
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    });
+            }
+        })
+
     }
 
-    useEffect(() => {
-        document.getElementById("img10").style.boxShadow = "0px 0px 30px 2px green"
-    }, [])
+
 
     const showModal2 = (val) => {
-        setCardValue(val)
-        setModalShow2(true)
+        // setModalShow2(true)
 
         if (val === 'tie') {
             document.getElementById('tie').style.boxShadow = '0px 0px 30px 2px  green';
@@ -200,7 +230,7 @@ const WinHeader = ({ baseUrl, userBalance }) => {
                     }}><div className='main1' style={{ height: "1.5rem", borderRadius: "25px 26px 0px 0px", backgroundColor: "darkgreen", display: "flex", justifyContent: "space-between" }} >
                         </div>
                         <FontSize >TIE</FontSize>
-                        <Card.Img variant="top" src="" />
+
 
                     </CardDiv>
 
@@ -212,7 +242,7 @@ const WinHeader = ({ baseUrl, userBalance }) => {
                     }}><div style={{ height: "1.5rem", borderRadius: "10px 10px 5px 4px", backgroundColor: "darkblue", display: "flex", justifyContent: "space-between" }}>
                         </div>
                         <FontSize >Andar</FontSize>
-                        <Card.Img variant="top" src="" />
+
 
                     </CardDiv>
                     <CardDiv id="bahar" onClick={() => checkoutOrder('bahar')} style={{
@@ -221,8 +251,8 @@ const WinHeader = ({ baseUrl, userBalance }) => {
                         border: "5px solid #e4d00a"
                     }}><div style={{ height: "1.5rem", borderRadius: "10px 10px 5px 0px", backgroundColor: "darkred", display: "flex", justifyContent: "space-between" }}>
                         </div>
-                        <FontSize >Bahar</FontSize>
-                        <Card.Img variant="top" src="" />
+                        <FontSize>Bahar</FontSize>
+
 
                     </CardDiv>
                 </div>
@@ -245,7 +275,6 @@ const WinHeader = ({ baseUrl, userBalance }) => {
                         <div >
                             <img id="img1000" src={coin3} style={{ boxShadow: '1px 1px gray', width: '5rem', borderRadius: '50rem', background: '#BB4D9D' }} alt='coin3' onClick={() => showDiv('1000')} />
                         </div>
-
 
                         <div >
                             <img id="img10000" src={coin6} style={{ boxShadow: '1px 1px gray', width: '5rem', borderRadius: '50rem', background: '#10B99D' }} alt='coin6' onClick={() => showDiv('10000')} />
